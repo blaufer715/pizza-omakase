@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" role="img" aria-labelledby="t">
+  <title id="t">Cartoon of the chef stretching pizza dough</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="65%">
+      <stop offset="0" stop-color="#F7E6CC"/>
+      <stop offset="1" stop-color="#EBCFA6"/>
+    </radialGradient>
+    <radialGradient id="dough" cx="45%" cy="40%" r="60%">
+      <stop offset="0" stop-color="#FBEBC8"/>
+      <stop offset="1" stop-color="#EBCB92"/>
+    </radialGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="400" height="500" rx="18" fill="url(#bg)"/>
+  <circle cx="200" cy="300" r="150" fill="#B5321F" opacity=".12"/>
+
+  <!-- flour puffs -->
+  <g transform="translate(0,-40)" fill="#fff" opacity=".85">
+    <circle cx="96" cy="70" r="5"/><circle cx="110" cy="58" r="3"/><circle cx="300" cy="64" r="4"/>
+    <circle cx="318" cy="84" r="2.5"/><circle cx="84" cy="104" r="2.5"/><circle cx="290" cy="40" r="2"/>
+  </g>
+
+  <!-- spin lines -->
+  <g transform="translate(0,-40)" fill="none" stroke="#18221C" stroke-width="3" stroke-linecap="round" opacity=".55">
+    <path d="M86 92 q-16 26 4 48"/>
+    <path d="M314 92 q16 26 -4 48"/>
+    <path d="M70 108 q-10 18 2 32"/>
+    <path d="M330 108 q10 18 -2 32"/>
+  </g>
+
+  <!-- dough disc -->
+  <g transform="translate(0,-40)" stroke="#18221C" stroke-width="3.5">
+    <ellipse cx="200" cy="112" rx="112" ry="34" fill="#E2B877"/>
+    <ellipse cx="200" cy="106" rx="96" ry="26" fill="url(#dough)"/>
+  </g>
+  <g transform="translate(0,-40)" fill="#C99A5B" opacity=".7">
+    <circle cx="160" cy="104" r="3"/><circle cx="228" cy="112" r="2.5"/><circle cx="246" cy="98" r="2"/><circle cx="182" cy="116" r="2"/>
+  </g>
+
+  <!-- arms (behind body) -->
+  <g stroke="#18221C" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <!-- left arm -->
+    <path d="M118 330 C90 260 94 170 122 112 L150 122 C130 180 132 250 152 316 Z" fill="#fff"/>
+    <path d="M122 112 L150 122 L158 98 L132 88 Z" fill="#E7B088"/>
+    <!-- right arm -->
+    <path d="M282 330 C310 260 306 170 278 112 L250 122 C270 180 268 250 248 316 Z" fill="#fff"/>
+    <path d="M278 112 L250 122 L242 98 L268 88 Z" fill="#E7B088"/>
+  </g>
+  <!-- hands under the dough -->
+  <g transform="translate(0,-40)" stroke="#18221C" stroke-width="3.5" fill="#E7B088" stroke-linejoin="round">
+    <path d="M140 136 q-4 -14 8 -20 q10 -4 22 0 q10 4 6 14 q-4 10 -18 12 q-14 2 -18 -6 z"/>
+    <path d="M260 136 q4 -14 -8 -20 q-10 -4 -22 0 q-10 4 -6 14 q4 10 18 12 q14 2 18 -6 z"/>
+  </g>
+  <!-- sleeve cuffs -->
+  <g stroke="#18221C" stroke-width="3" fill="#fff">
+    <path d="M118 120 l34 10 l-3 12 l-34 -10 z"/>
+    <path d="M282 120 l-34 10 l3 12 l34 -10 z"/>
+  </g>
+
+  <!-- body: chef jacket -->
+  <g stroke="#18221C" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M96 500 C96 400 120 330 200 318 C280 330 304 400 304 500 Z" fill="#fff"/>
+    <!-- apron -->
+    <path d="M150 360 L250 360 L262 500 L138 500 Z" fill="#F6F4EF"/>
+    <path d="M150 360 L176 326 M250 360 L224 326" fill="none"/>
+    <!-- apron pocket -->
+    <path d="M172 430 h56 v34 q-28 10 -56 0 z" fill="#ECE8DF"/>
+  </g>
+  <!-- jacket details -->
+  <g fill="#18221C">
+    <circle cx="128" cy="400" r="3.5"/><circle cx="128" cy="430" r="3.5"/>
+    <circle cx="272" cy="400" r="3.5"/><circle cx="272" cy="430" r="3.5"/>
+  </g>
+  <!-- collar -->
+  <path d="M168 322 L200 344 L232 322 L226 310 L174 310 Z" fill="#fff" stroke="#18221C" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- little brand patch on sleeve -->
+  <rect x="270" y="352" width="22" height="9" rx="2" fill="#18221C" opacity=".8" transform="rotate(-18 281 356)"/>
+  <!-- tomato on apron pocket -->
+  <circle cx="200" cy="444" r="7" fill="#B5321F"/><path d="M196 437 l4 3 l4 -3" stroke="#2F5A3B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- neck -->
+  <path d="M182 300 L182 318 Q200 330 218 318 L218 300 Z" fill="#DDA27A" stroke="#18221C" stroke-width="3.5"/>
+
+  <!-- head -->
+  <g stroke="#18221C" stroke-width="3.5" stroke-linejoin="round">
+    <!-- ears -->
+    <ellipse cx="146" cy="250" rx="12" ry="17" fill="#E7B088"/>
+    <ellipse cx="254" cy="250" rx="12" ry="17" fill="#E7B088"/>
+    <!-- face -->
+    <path d="M150 232 C150 186 250 186 250 232 L250 262 C250 300 228 320 200 320 C172 320 150 300 150 262 Z" fill="#E7B088"/>
+  </g>
+  <!-- beard -->
+  <path d="M152 258 C156 300 176 322 200 322 C224 322 244 300 248 258 C240 280 228 292 216 292 C208 286 192 286 184 292 C172 292 160 280 152 258 Z" fill="#3A2A20" stroke="#18221C" stroke-width="3" stroke-linejoin="round"/>
+  <!-- moustache -->
+  <path d="M176 280 C186 270 196 274 200 278 C204 274 214 270 224 280 C214 286 206 284 200 282 C194 284 186 286 176 280 Z" fill="#2B1D16"/>
+  <!-- smile -->
+  <path d="M186 292 q14 10 28 0" fill="#fff" stroke="#18221C" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- nose (caricature) -->
+  <path d="M200 238 C196 252 188 262 192 270 C196 276 206 276 210 270" fill="#DDA27A" stroke="#18221C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- eyes: looking up at the dough -->
+  <g stroke="#18221C" stroke-width="3">
+    <ellipse cx="178" cy="238" rx="13" ry="11" fill="#fff"/>
+    <ellipse cx="222" cy="238" rx="13" ry="11" fill="#fff"/>
+  </g>
+  <circle cx="180" cy="233" r="6" fill="#6E7F3E"/><circle cx="224" cy="233" r="6" fill="#6E7F3E"/>
+  <circle cx="180" cy="232" r="3" fill="#18221C"/><circle cx="224" cy="232" r="3" fill="#18221C"/>
+  <circle cx="182" cy="230" r="1.4" fill="#fff"/><circle cx="226" cy="230" r="1.4" fill="#fff"/>
+  <!-- eyebrows, raised -->
+  <path d="M162 220 q14 -10 30 -2" fill="none" stroke="#2B1D16" stroke-width="6" stroke-linecap="round"/>
+  <path d="M208 218 q16 -8 30 4" fill="none" stroke="#2B1D16" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- big curly hair -->
+  <g fill="#2B1D16" stroke="#18221C" stroke-width="3">
+    <circle cx="150" cy="214" r="18"/>
+    <circle cx="250" cy="214" r="18"/>
+    <circle cx="146" cy="190" r="22"/>
+    <circle cx="254" cy="190" r="22"/>
+    <circle cx="164" cy="166" r="24"/>
+    <circle cx="236" cy="166" r="24"/>
+    <circle cx="190" cy="154" r="26"/>
+    <circle cx="214" cy="152" r="25"/>
+    <circle cx="200" cy="176" r="26"/>
+    <circle cx="174" cy="190" r="18"/>
+    <circle cx="226" cy="190" r="18"/>
+  </g>
+  <!-- curl highlights -->
+  <g fill="none" stroke="#5A4232" stroke-width="2.5" stroke-linecap="round">
+    <path d="M182 150 q8 -8 16 0"/><path d="M210 146 q8 -8 16 0"/><path d="M152 186 q6 -8 14 -2"/>
+    <path d="M238 186 q8 -6 14 2"/><path d="M190 176 q8 -8 18 0"/><path d="M160 164 q6 -8 14 -2"/>
+    <path d="M230 162 q8 -6 14 2"/>
+  </g>
+  <!-- curl falling on forehead -->
+  <path d="M196 196 q-10 8 -2 18 q8 6 12 -2" fill="none" stroke="#2B1D16" stroke-width="5" stroke-linecap="round"/>
+</svg>
