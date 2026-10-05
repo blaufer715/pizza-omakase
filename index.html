@@ -461,6 +461,7 @@ function wireForm(form, okText){
       const res=await fetch(url,{method:"POST",headers:{Accept:"application/json"},body:data});
       if(!res.ok) throw new Error(res.status);
       form.reset();
+      if(form.id==="private"){location.href="request-received.html";return}
       status.hidden=false;status.className="status ok";status.textContent=okText;
     }catch(e){
       status.hidden=false;status.className="status err";
