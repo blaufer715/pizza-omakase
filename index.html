@@ -333,10 +333,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
    EVENTS_CSV_URL: your Google Sheet, published as CSV (File → Share → Publish to web → CSV).
                    Columns: date | time | location | seats_left | status | note | pay_link
                    date as YYYY-MM-DD, status = open / full (leave blank for open).
-   FORM_ENDPOINT:  your Formspree form URL, e.g. https://formspree.io/f/abcdwxyz
+   WEB3FORMS_KEY:  your Web3Forms access key (emailed to you by web3forms.com). Used if filled in.
+   FORM_ENDPOINT:  or, instead, a Formspree form URL, e.g. https://formspree.io/f/abcdwxyz
                    Every reservation and private-event request is emailed to you.
 ============================================================================ */
 const EVENTS_CSV_URL = "";
+const WEB3FORMS_KEY  = "";
 const FORM_ENDPOINT  = "";
 
 /* Dates shown while no Google Sheet is connected. Edit, add or remove lines here.
@@ -441,14 +443,22 @@ function wireForm(form, okText){
       status.textContent=`Please fill in "${form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()}" before sending.`;
       missing.focus();return;
     }
-    if(!FORM_ENDPOINT){
+    if(!WEB3FORMS_KEY&&!FORM_ENDPOINT){
       status.hidden=false;status.className="status err";
       status.textContent="Not connected yet, so nothing was sent.";
       return;
     }
     btn.disabled=true;btn.textContent="Sending…";
     try{
-      const res=await fetch(FORM_ENDPOINT,{method:"POST",headers:{Accept:"application/json"},body:new FormData(form)});
+      const data=new FormData(form);
+      let url=FORM_ENDPOINT;
+      if(WEB3FORMS_KEY){
+        url="https://api.web3forms.com/submit";
+        data.append("access_key",WEB3FORMS_KEY);
+        data.append("subject",form.id==="private"?"Pizza Omakase · private event request":"Pizza Omakase · seat request");
+        data.append("from_name","Pizza Omakase website");
+      }
+      const res=await fetch(url,{method:"POST",headers:{Accept:"application/json"},body:data});
       if(!res.ok) throw new Error(res.status);
       form.reset();
       status.hidden=false;status.className="status ok";status.textContent=okText;
