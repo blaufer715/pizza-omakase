@@ -113,7 +113,7 @@
     <path d="M152 234 C152 190 248 190 248 234 L248 264 C248 300 226 320 200 320 C174 320 152 300 152 264 Z" fill="#E7B088"/>
   </g>
   <!-- trimmed beard: short and close to the jaw -->
-  <path d="M155 266 C160 296 178 312 200 312 C222 312 240 296 245 266 C238 280 228 288 218 288 C210 284 190 284 182 288 C172 288 162 280 155 266 Z" fill="#3A2A20" stroke="#18221C" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M151 248 C151 300 172 324 200 324 C228 324 249 300 249 248 C245 270 236 284 220 288 C210 284 190 284 180 288 C164 284 155 270 151 248 Z" fill="#3A2A20" stroke="#18221C" stroke-width="2.5" stroke-linejoin="round"/>
   <!-- stubble on cheeks -->
   <g fill="#3A2A20" opacity=".25">
     <circle cx="164" cy="262" r="1.5"/><circle cx="170" cy="268" r="1.5"/><circle cx="160" cy="256" r="1.3"/>
