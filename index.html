@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one long counter-service scroll — hero → the tasting card → the pies → dates → book → private events.
+/* Layout: one long counter-service scroll — hero → the tasting card → the pies → dates → book. Private events live on private-events.html.
    Palette: basil-ink on a cool flour-dusted marble, crust gold for warmth, tomato reserved for actions. */
 :root{
   --bg:#F3F2EE;
@@ -155,7 +155,7 @@ section.alt{background:var(--soft)}
 @media (max-width:640px){.event{grid-template-columns:64px 1fr}.event .act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.date .day{font-size:2.1rem}}
 
 /* forms */
-.forms{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+.forms{display:grid;grid-template-columns:1fr;max-width:680px;margin-inline:auto;gap:clamp(24px,4vw,48px);align-items:start}
 @media (max-width:900px){.forms{grid-template-columns:1fr}}
 form.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:16px;min-width:0}
 form.panel .ph{display:flex;flex-direction:column;gap:6px;margin-bottom:4px}
@@ -191,7 +191,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     <nav class="links" aria-label="Sections">
       <a href="#about">About</a>
       <a href="#dates">Dates</a>
-      <a href="#private">Private events</a>
+      <a href="private-events.html">Private events</a>
     </nav>
   </div>
 </header>
@@ -214,7 +214,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         </div>
         <div class="ctas">
           <a class="btn primary" href="#book">Book a seat</a>
-          <a class="btn" href="#private">Private events</a>
+          <a class="btn" href="private-events.html">Private events</a>
         </div>
       </div>
       <figure>
@@ -273,29 +273,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         <button class="btn primary" type="submit">Send request</button>
         <p class="status" role="status" hidden></p>
       </form>
-
-      <form class="panel" id="private" novalidate>
-        <h2 class="form-title">Private events</h2>
-        <input type="hidden" name="_subject" value="New private event request">
-        <input type="hidden" name="form" value="private-event">
-        <div class="row">
-          <div class="field"><label for="p-name">Name</label><input id="p-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="p-phone">Phone</label><input id="p-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
-        </div>
-        <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
-        <div class="row">
-          <div class="field"><label for="p-date">Date</label><input id="p-date" name="date" type="date" required></div>
-          <div class="field"><label for="p-guests">Guests</label><input id="p-guests" name="guests" type="number" min="2" max="80" inputmode="numeric" required></div>
-        </div>
-        <div class="field"><label for="p-city">Location</label><input id="p-city" name="location" required></div>
-        <div class="field">
-          <label for="p-msg">Notes <span class="opt">(optional)</span></label>
-          <textarea id="p-msg" name="message"></textarea>
-        </div>
-        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn primary" type="submit">Send request</button>
-        <p class="status" role="status" hidden></p>
-      </form>
     </div>
   </section>
 </div>
@@ -311,7 +288,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         <p>It started with experimenting with pizza at home. More and more friends heard about it and asked to join, and it grew into something bigger: Pizza Omakase.</p>
         <div class="ctas">
           <a class="btn primary" href="#book">Book a seat</a>
-          <a class="btn" href="#private">Private events</a>
+          <a class="btn" href="private-events.html">Private events</a>
         </div>
       </div>
       <figure class="about-photo">
@@ -455,13 +432,12 @@ function wireForm(form, okText){
       if(WEB3FORMS_KEY){
         url="https://api.web3forms.com/submit";
         data.append("access_key",WEB3FORMS_KEY);
-        data.append("subject",form.id==="private"?"Pizza Omakase · private event request":"Pizza Omakase · seat request");
+        data.append("subject","Pizza Omakase · seat request");
         data.append("from_name","Pizza Omakase website");
       }
       const res=await fetch(url,{method:"POST",headers:{Accept:"application/json"},body:data});
       if(!res.ok) throw new Error(res.status);
       form.reset();
-      if(form.id==="private"){location.href="request-received.html";return}
       status.hidden=false;status.className="status ok";status.textContent=okText;
     }catch(e){
       status.hidden=false;status.className="status err";
@@ -472,15 +448,14 @@ function wireForm(form, okText){
   });
 }
 
-const pDate=document.getElementById("p-date");pDate.min=isoIn(1);
 wireForm(document.getElementById("reserveForm"),"Got it. I'll be in touch to confirm.");
-wireForm(document.getElementById("private"),"Got it. I'll be in touch soon.");
 loadEvents();
 
 /* Home / About views. #about shows the About page; any other link returns home and scrolls to its section. */
 const homeView=document.getElementById("homeView"), aboutView=document.getElementById("aboutView");
 function route(){
   const h=location.hash;
+  if(h==="#private"){location.replace("private-events.html");return}
   const about=h==="#about";
   homeView.hidden=about; aboutView.hidden=!about;
   document.querySelectorAll('nav.links a').forEach(a=>a.toggleAttribute("aria-current",a.getAttribute("href")===h));

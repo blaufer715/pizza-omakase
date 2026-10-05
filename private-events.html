@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex">
-<title>Request received · Pizza Omakase</title>
+<meta property="og:title" content="Private events · Pizza Omakase">
+<meta property="og:image" content="https://pizzaomakase.co.il/images/originals/round-margherita-leopard.jpg">
+<title>Private events · Pizza Omakase</title>
+<meta name="description" content="Book a private Pizza Omakase evening for your group: a chef-guided pizza tasting with an appetizer, five unique pies, dessert and wine.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -180,20 +182,16 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--basil);outline-o
 footer{border-top:1px solid var(--line);padding-block:32px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
 
-/* thank-you page */
-.thanks{padding-block:clamp(40px,7vw,88px)}
-.thanks .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
-.thanks h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;letter-spacing:-.04em}
-.thanks h1 em{font-style:normal;color:var(--tomato)}
-.thanks .copy{display:flex;flex-direction:column;gap:22px;min-width:0}
-.thanks figure{margin:0}
-.thanks figure img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
-.next{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.next li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
-.next .n{font-family:var(--mono);font-size:.8rem;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--bg);margin-top:2px}
-.note{max-width:640px;margin-inline:auto}
-.note form{display:flex;flex-direction:column;gap:16px}
-@media (max-width:820px){.thanks .wrap{grid-template-columns:1fr}.thanks figure{max-width:240px;justify-self:center;width:100%;order:-1}}
+/* private events page */
+.pe-hero{padding-block:clamp(40px,7vw,80px) clamp(24px,4vw,40px)}
+.pe-hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
+.pe-hero h1{font-size:clamp(2.8rem,8vw,5.2rem);font-weight:800;letter-spacing:-.04em}
+.pe-hero h1 em{font-style:normal;color:var(--tomato)}
+.pe-hero .copy{display:flex;flex-direction:column;gap:22px;min-width:0}
+.pe-hero figure{margin:0}
+.pe-hero figure img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
+.pe-form{max-width:680px;margin-inline:auto}
+@media (max-width:820px){.pe-hero .wrap{grid-template-columns:1fr}.pe-hero figure{max-width:260px;justify-self:center;width:100%;order:-1}}
 </style>
 </head>
 <body>
@@ -201,30 +199,62 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
   <div class="wrap">
     <a class="mark" href="./">Pizza Omakase</a>
     <nav class="links" aria-label="Main">
+      <a href="./#about">About</a>
       <a href="./#dates">Dates</a>
-      <a href="private-events.html">Private events</a>
+      <a href="private-events.html" aria-current="page">Private events</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <div class="thanks">
+  <div class="pe-hero">
     <div class="wrap">
       <div class="copy">
-        <p class="eyebrow">Private event request</p>
-        <h1>Thank you.<br><em>We got your request.</em></h1>
-        <p class="lede">We're excited to cook for your group.</p>
-        <ul class="next">
-          <li><span class="n">1</span><p>We'll review your date and event details.</p></li>
-          <li><span class="n">2</span><p>We'll reach out by phone or email to plan the menu and confirm everything.</p></li>
+        <p class="eyebrow">Private events</p>
+        <h1>Pizza Omakase<br><em>for your group.</em></h1>
+        <p class="lede">Book a private evening: the full chef-guided tasting, just for your guests. Tell us about your event and we'll be in touch.</p>
+        <div class="includes-card">
+        <p class="label">Includes:</p>
+        <ul class="includes">
+          <li>5 unique pies</li>
+          <li>Appetizer</li>
+          <li>Wine</li>
+          <li>Dessert</li>
         </ul>
-        <div class="ctas"><a class="btn" href="./">Back to Pizza Omakase</a></div>
+        </div>
       </div>
       <figure>
-        <img src="images/pizza-classic.webp" alt="The Classic pie" width="900" height="900">
+        <img src="images/pizza-vodka.webp" alt="The Vodka pie" width="900" height="900">
       </figure>
     </div>
   </div>
+
+  <section class="alt">
+    <div class="wrap pe-form">
+      <form class="panel" id="private" novalidate>
+        <h2 class="form-title">Private events</h2>
+        <input type="hidden" name="_subject" value="New private event request">
+        <input type="hidden" name="form" value="private-event">
+        <div class="row">
+          <div class="field"><label for="p-name">Name</label><input id="p-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="p-phone">Phone</label><input id="p-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
+        </div>
+        <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="row">
+          <div class="field"><label for="p-date">Date</label><input id="p-date" name="date" type="date" required></div>
+          <div class="field"><label for="p-guests">Guests</label><input id="p-guests" name="guests" type="number" min="2" max="80" inputmode="numeric" required></div>
+        </div>
+        <div class="field"><label for="p-city">Location</label><input id="p-city" name="location" required></div>
+        <div class="field">
+          <label for="p-msg">Notes <span class="opt">(optional)</span></label>
+          <textarea id="p-msg" name="message"></textarea>
+        </div>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn primary" type="submit">Send request</button>
+        <p class="status" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -232,5 +262,37 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     <span>pizzaomakase.co.il</span>
   </div>
 </footer>
+
+<script>
+const WEB3FORMS_KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
+const form=document.getElementById("private");
+const status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
+const pDate=document.getElementById("p-date");
+{const d=new Date();d.setDate(d.getDate()+1);pDate.min=d.toISOString().slice(0,10)}
+form.addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
+  if(missing){
+    status.hidden=false;status.className="status err";
+    status.textContent=`Please fill in "${form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()}" before sending.`;
+    missing.focus();return;
+  }
+  btn.disabled=true;btn.textContent="Sending…";
+  try{
+    const data=new FormData(form);
+    data.append("access_key",WEB3FORMS_KEY);
+    data.append("subject","Pizza Omakase · private event request");
+    data.append("from_name","Pizza Omakase website");
+    const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
+    if(!res.ok) throw new Error(res.status);
+    form.reset();
+    location.href="request-received.html";
+  }catch(e){
+    status.hidden=false;status.className="status err";
+    status.textContent="Didn't go through. Please try again.";
+    btn.disabled=false;btn.textContent="Send request";
+  }
+});
+</script>
 </body>
 </html>
