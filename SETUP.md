@@ -55,3 +55,17 @@ Save. Until these are filled in, the site shows example dates and the forms won'
 
 - **New evening / sold out:** edit the Google Sheet. The site picks it up on the next page load (Google can take up to ~5 minutes to refresh the published CSV).
 - **New pizza photos:** put the image in `images/`, change the matching `src` and caption in `index.html`, then drag the folder onto Netlify's **Deploys** page again.
+
+## Taking payment with Morning (Green Invoice)
+
+1. Sign up at greeninvoice.co.il on the **Best** plan or higher (payment links need it), and turn on
+   digital payments (credit card + Bit). Morning issues a receipt automatically for every payment.
+2. Create a **payment page / link** for each evening: name it with the date (e.g. "Pizza Omakase · Wed 14 Oct"),
+   set the price per seat, and let the guest choose the number of seats if the option is offered.
+   Ask for name, phone and email so you know who booked.
+3. Copy each link into that evening's `pay_link`:
+   - in `index.html`, the `EXAMPLE_EVENTS` list near the bottom, or
+   - in the Google Sheet, a `pay_link` column, once the sheet is connected.
+4. The button for that evening changes from **Reserve** to **Reserve & pay** and opens the Morning checkout.
+   Evenings without a link keep the request form.
+5. After each payment, lower `seats_left`. At 0 the button switches to **Join waitlist** and stops taking payment.

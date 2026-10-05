@@ -331,7 +331,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 <script>
 /* ===================== SETTINGS (edit these two lines) =====================
    EVENTS_CSV_URL: your Google Sheet, published as CSV (File → Share → Publish to web → CSV).
-                   Columns: date | time | location | seats_left | status | note
+                   Columns: date | time | location | seats_left | status | note | pay_link
                    date as YYYY-MM-DD, status = open / full (leave blank for open).
    FORM_ENDPOINT:  your Formspree form URL, e.g. https://formspree.io/f/abcdwxyz
                    Every reservation and private-event request is emailed to you.
@@ -340,11 +340,13 @@ const EVENTS_CSV_URL = "";
 const FORM_ENDPOINT  = "";
 
 /* Dates shown while no Google Sheet is connected. Edit, add or remove lines here.
-   Past dates hide automatically. Set seats_left to "0" or status to "full" for a waitlist. */
+   Past dates hide automatically. Set seats_left to "0" or status to "full" for a waitlist.
+   pay_link: paste that evening's Morning payment link to make its button "Reserve & pay".
+             Leave it "" and the button opens the request form instead. */
 const EXAMPLE_EVENTS = [
-  {date: "2026-10-14", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: ""},
-  {date: "2026-10-21", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: ""},
-  {date: "2026-10-28", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: ""}
+  {date: "2026-10-14", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""},
+  {date: "2026-10-21", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""},
+  {date: "2026-10-28", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""}
 ];
 
 function isoIn(days){const d=new Date();d.setDate(d.getDate()+days);return d.toISOString().slice(0,10)}
@@ -411,9 +413,16 @@ function renderEvents(events){
     if(full){pill.className="pill full";pill.textContent="Full · waitlist"}
     else if(!isNaN(left)&&left<=4){pill.className="pill few";pill.textContent=`${left} seat${left===1?"":"s"} left`}
     else{pill.className="pill open";pill.textContent=isNaN(left)?"Seats open":`${left} seats open`}
-    const b=document.createElement("button");b.type="button";b.className="btn small"+(full?"":" primary");
-    b.textContent=full?"Join waitlist":"Reserve";
-    b.addEventListener("click",()=>{sel.value=label+(full?" (waitlist)":"");document.getElementById("book").scrollIntoView({behavior:"smooth"});setTimeout(()=>document.getElementById("r-name").focus({preventScroll:true}),400)});
+    const pay=!full&&/^https:\/\//.test(e.pay_link||"")?e.pay_link:"";
+    let b;
+    if(pay){
+      b=document.createElement("a");b.className="btn small primary";b.href=pay;b.target="_blank";b.rel="noopener";
+      b.textContent="Reserve & pay";
+    }else{
+      b=document.createElement("button");b.type="button";b.className="btn small"+(full?"":" primary");
+      b.textContent=full?"Join waitlist":"Reserve";
+      b.addEventListener("click",()=>{sel.value=label+(full?" (waitlist)":"");document.getElementById("book").scrollIntoView({behavior:"smooth"});setTimeout(()=>document.getElementById("r-name").focus({preventScroll:true}),400)});
+    }
     act.append(pill,b);
     row.append(date,info,act);list.appendChild(row);
 
