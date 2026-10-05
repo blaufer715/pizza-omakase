@@ -1,0 +1,57 @@
+# Putting Pizza Omakase live on pizzaomakase.co.il
+
+Three free services, about 30 minutes, no coding beyond pasting two links.
+
+| What | Service | Why |
+|---|---|---|
+| Hosting the site | Netlify (or Cloudflare Pages) | Free, drag-and-drop upload, free HTTPS |
+| Receiving reservations & event requests | Formspree | Every form submission is emailed to you |
+| Your calendar of evenings | A Google Sheet | Edit dates from your phone; the site updates itself |
+
+---
+
+## 1. Make your events calendar (Google Sheet)
+
+1. Create a new Google Sheet. In row 1 type these headers exactly:
+
+   | date | time | location | seats_left | status | note |
+   |---|---|---|---|---|---|
+   | 2026-10-22 | 19:30 | Haifa · Carmel | 6 | open | Autumn menu |
+
+2. Add one row per evening. `date` must be YYYY-MM-DD. `status` is `open` or `full`.
+   Past dates disappear from the site automatically. Set `seats_left` to 0 or `status` to `full` and the
+   site shows "Full · waitlist".
+3. **File → Share → Publish to web** → choose the sheet tab → **Comma-separated values (.csv)** → Publish.
+4. Copy the link it gives you (it ends in `output=csv`).
+
+## 2. Set up the forms (Formspree)
+
+1. Sign up at formspree.io with the email where you want requests to arrive.
+2. Create a new form. Copy its endpoint, e.g. `https://formspree.io/f/abcdwxyz`.
+3. Both forms (seat requests and private events) can use the same endpoint; each email says which form it came from.
+   The free plan covers 50 submissions a month.
+
+## 3. Paste both links into the site
+
+Open `index.html` in any text editor, find the SETTINGS block near the bottom, and fill in:
+
+```js
+const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/.../pub?output=csv";
+const FORM_ENDPOINT  = "https://formspree.io/f/abcdwxyz";
+```
+
+Save. Until these are filled in, the site shows example dates and the forms won't send.
+
+## 4. Upload the site (Netlify)
+
+1. Sign up at netlify.com → **Add new site → Deploy manually**.
+2. Drag the whole `pizzaomakase-site` folder onto the page. You get a temporary `something.netlify.app` address; test both forms there.
+3. **Domain management → Add a domain** → `pizzaomakase.co.il` (and `www.pizzaomakase.co.il`).
+4. Netlify shows the DNS records to add. Log in to the registrar where you bought the .co.il domain and add them
+   (usually an A record for the bare domain and a CNAME for `www`). DNS can take a few hours to take effect.
+5. HTTPS is issued automatically once DNS works.
+
+## Updating later
+
+- **New evening / sold out:** edit the Google Sheet. The site picks it up on the next page load (Google can take up to ~5 minutes to refresh the published CSV).
+- **New pizza photos:** put the image in `images/`, change the matching `src` and caption in `index.html`, then drag the folder onto Netlify's **Deploys** page again.
