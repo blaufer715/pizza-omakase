@@ -82,21 +82,21 @@
 
   <!-- BODY: chef jacket with rounded shoulders -->
   <g stroke="#18221C" stroke-width="3.5" stroke-linejoin="round">
-    <path d="M70 500 C70 430 92 384 140 362 C160 352 180 346 200 346 C220 346 240 352 260 362 C308 384 330 430 330 500 Z" fill="#fff"/>
+    <path d="M108 500 C106 436 120 392 152 368 C170 356 186 348 200 348 C214 348 230 356 248 368 C280 392 294 436 292 500 Z" fill="#fff"/>
     <!-- apron -->
-    <path d="M160 392 L240 392 L254 500 L146 500 Z" fill="#F6F4EF"/>
-    <path d="M160 392 L180 350 M240 392 L220 350" fill="none"/>
+    <path d="M168 392 L232 392 L242 500 L158 500 Z" fill="#F6F4EF"/>
+    <path d="M168 392 L184 352 M232 392 L216 352" fill="none"/>
     <!-- apron pocket -->
-    <path d="M174 440 h52 v32 q-26 10 -52 0 z" fill="#ECE8DF"/>
+    <path d="M178 440 h44 v30 q-22 9 -44 0 z" fill="#ECE8DF"/>
   </g>
   <!-- shoulder seams -->
   <g fill="none" stroke="#18221C" stroke-width="2" opacity=".35" stroke-linecap="round">
-    <path d="M118 380 q8 26 6 60"/><path d="M282 380 q-8 26 -6 60"/>
+    <path d="M138 382 q6 26 4 58"/><path d="M262 382 q-6 26 -4 58"/>
   </g>
   <!-- buttons -->
   <g fill="#18221C">
-    <circle cx="128" cy="412" r="3.5"/><circle cx="130" cy="442" r="3.5"/>
-    <circle cx="272" cy="412" r="3.5"/><circle cx="270" cy="442" r="3.5"/>
+    <circle cx="146" cy="412" r="3.5"/><circle cx="148" cy="442" r="3.5"/>
+    <circle cx="254" cy="412" r="3.5"/><circle cx="252" cy="442" r="3.5"/>
   </g>
   <!-- tomato on pocket -->
   <circle cx="200" cy="454" r="7" fill="#B5321F"/>
