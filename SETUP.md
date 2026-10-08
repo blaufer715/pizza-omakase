@@ -69,3 +69,38 @@ Save. Until these are filled in, the site shows example dates and the forms won'
 4. The button for that evening changes from **Reserve** to **Reserve & pay** and opens the Morning checkout.
    Evenings without a link keep the request form.
 5. After each payment, lower `seats_left`. At 0 the button switches to **Join waitlist** and stops taking payment.
+
+## Reviews page
+
+- Guests leave a review on **reviews.html**. Each one is emailed to you through Web3Forms (same as the booking forms).
+  Nothing appears on the site until you approve it.
+- To publish reviews: add a tab called **Reviews** to your Google Sheet with these headers in row 1:
+
+  | name | date | rating | review | approved |
+  |---|---|---|---|---|
+
+  Copy in the reviews you want to show, set `date` as YYYY-MM-DD and `rating` 1–5, and type `yes` under `approved`.
+- Publish that tab (File → Share → Publish to web → Reviews tab → CSV) and paste the link into
+  `REVIEWS_CSV_URL` at the bottom of **reviews.html**.
+
+## Google reviews (Google Business Profile)
+
+1. Go to business.google.com and create a profile for **Pizza Omakase** (category: *Pizza restaurant* or *Caterer*).
+   Choose that you serve customers at their locations / have no storefront, so your address stays hidden,
+   and list the areas you serve (Jaffa, Tel Aviv).
+2. Add the website, photos of your pies, and a short description.
+3. Once verified: profile → **Ask for reviews** → copy the link.
+4. Paste it into `GOOGLE_REVIEW_URL` at the bottom of **reviews.html**. A **Review us on Google** button appears.
+5. Send that link to guests the day after each evening.
+
+## Search engines and AI assistants
+
+Already built in: page titles and descriptions, link previews (WhatsApp, Facebook), structured data describing
+Pizza Omakase, event listings generated from your evenings, `robots.txt`, `sitemap.xml`, and `llms.txt`
+(a plain summary for AI assistants such as ChatGPT).
+
+Once the site is live on **pizzaomakase.co.il**:
+1. search.google.com/search-console → Add property → Domain → `pizzaomakase.co.il` → verify.
+2. Sitemaps → submit `https://pizzaomakase.co.il/sitemap.xml`.
+3. bing.com/webmasters → import from Google Search Console. (Bing results also power ChatGPT search and Copilot.)
+4. Optional: add `price` (shekels) as a column in your evenings so Google can show it with each event.

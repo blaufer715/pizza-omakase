@@ -3,10 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta property="og:title" content="Pizza Omakase">
-<meta property="og:image" content="https://pizzaomakase.co.il/images/originals/round-margherita-leopard.jpg">
-<title>Pizza Omakase</title>
-<meta name="description" content="Chef's-choice pizza evenings: an appetizer, five unique pies, dessert and wine at one intimate table. Reserve a seat or book a private event.">
+<meta property="og:title" content="Pizza Omakase · New York–style pizza tasting in Israel">
+<meta property="og:image" content="https://pizzaomakase.co.il/images/originals/classic.jpg">
+<title>Pizza Omakase · New York–style pizza tasting in Israel</title>
+<meta name="description" content="The ultimate pizza tasting experience, guided by the chef: an appetizer, five unique New York–style pies, dessert and wine at an intimate table in Jaffa. Book a seat or a private event.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pizza Omakase">
+<meta property="og:description" content="The ultimate pizza tasting experience, guided by the chef: an appetizer, five unique New York–style pies, dessert and wine at an intimate table in Jaffa. Book a seat or a private event.">
+<meta property="og:url" content="https://pizzaomakase.co.il/">
+<meta property="og:locale" content="en_IL">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#B5321F">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FoodEstablishment", "@id": "https://pizzaomakase.co.il/#business", "name": "Pizza Omakase", "url": "https://pizzaomakase.co.il/", "image": ["https://pizzaomakase.co.il/images/originals/classic.jpg", "https://pizzaomakase.co.il/images/pizza-vodka.webp", "https://pizzaomakase.co.il/images/pizza-spinach-artichoke.webp", "https://pizzaomakase.co.il/images/pizza-pear-hot-honey.webp"], "logo": "https://pizzaomakase.co.il/favicon.svg", "description": "Pizza Omakase is a chef's-choice New York–style pizza tasting experience in Israel: an appetizer, five unique pies, dessert and wine at one intimate table. Seats at scheduled evenings in Jaffa, private events, and pizza-making workshops.", "servesCuisine": ["Pizza", "New York-style pizza"], "areaServed": [{"@type": "City", "name": "Tel Aviv-Yafo"}, {"@type": "Country", "name": "Israel"}], "acceptsReservations": true, "knowsLanguage": ["en", "he"], "hasMenu": {"@type": "Menu", "name": "Pizza Omakase tasting", "description": "Chef's choice: appetizer, five unique pies, dessert and wine."}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -181,6 +190,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--basil);outline-o
 
 footer{border-top:1px solid var(--line);padding-block:32px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+footer .wrap a{text-decoration:none}
+footer .wrap a:hover{color:var(--ink)}
 @media (max-width:560px){header.top .wrap{flex-wrap:wrap;row-gap:6px}nav.links{width:100%;justify-content:space-between;gap:8px}}
 </style>
 
@@ -194,6 +205,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
       <a href="#dates">Dates</a>
       <a href="private-events.html">Private events</a>
       <a href="workshops.html">Workshops</a>
+      <a href="reviews.html">Reviews</a>
     </nav>
   </div>
 </header>
@@ -304,6 +316,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 <footer>
   <div class="wrap">
     <span>pizzaomakase.co.il</span>
+    <span><a href="reviews.html">Reviews</a> · <a href="private-events.html">Private events</a> · <a href="workshops.html">Workshops</a></span>
   </div>
 </footer>
 
@@ -363,6 +376,30 @@ async function loadEvents(){
   const today=new Date().toISOString().slice(0,10);
   events=events.filter(e=>e.date && e.date>=today).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
   renderEvents(events);
+  addEventSchema(events);
+}
+
+/* Lets Google and AI assistants list each evening as an event. */
+function addEventSchema(events){
+  const SITE="https://pizzaomakase.co.il/";
+  const data=events.map(e=>{
+    const full=(e.status||"").toLowerCase()==="full"||e.seats_left==="0";
+    const ev={"@type":"Event","name":"Pizza Omakase · "+e.location,
+      "description":"Chef's-choice New York–style pizza tasting: an appetizer, five unique pies, dessert and wine at one intimate table.",
+      "startDate":e.date+"T"+(e.time||"20:00")+":00+03:00",
+      "eventStatus":"https://schema.org/EventScheduled",
+      "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+      "location":{"@type":"Place","name":e.location,"address":{"@type":"PostalAddress","addressLocality":e.location,"addressCountry":"IL"}},
+      "image":[SITE+"images/originals/classic.jpg"],
+      "organizer":{"@type":"Organization","name":"Pizza Omakase","url":SITE},
+      "offers":{"@type":"Offer","url":(e.pay_link||SITE+"#dates"),"priceCurrency":"ILS","availability":full?"https://schema.org/SoldOut":"https://schema.org/InStock"}};
+    if(e.price) ev.offers.price=e.price;
+    return ev;
+  });
+  if(!data.length) return;
+  const s=document.createElement("script");s.type="application/ld+json";
+  s.textContent=JSON.stringify({"@context":"https://schema.org","@graph":data});
+  document.head.appendChild(s);
 }
 
 function renderEvents(events){

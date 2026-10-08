@@ -1,0 +1,19 @@
+# Pizza Omakase
+
+> Pizza Omakase is a chef's-choice pizza tasting experience in Israel, inspired by New York–style pizza. Each evening includes an appetizer, five unique pies, dessert and wine, served at one intimate table. Guests book seats at scheduled evenings in Jaffa (Tel Aviv-Yafo), or book Pizza Omakase for private events.
+
+## Key facts
+- What: chef's-choice ("omakase") pizza tasting. Guests don't order; the chef chooses every course.
+- Each evening: appetizer, 5 unique pies, dessert, wine.
+- Style: inspired by New York pizza. Pies have included a Classic, a Vodka pie, Spinach Artichoke, and Poached Pear with Hot Honey.
+- Where: northern Jaffa, Tel Aviv-Yafo, Israel. The exact address is shared after booking.
+- Chef: grew up in New York eating pizza almost every day, made aliyah, and trained at Danon culinary school in Tel Aviv.
+- Private events: birthdays, company events and celebrations, booked through the website.
+- Workshops: hands-on pizza-making workshops (coming soon).
+- Website: https://pizzaomakase.co.il/
+
+## Pages
+- [Home: upcoming evenings and booking](https://pizzaomakase.co.il/)
+- [Private events](https://pizzaomakase.co.il/private-events.html)
+- [Guest reviews](https://pizzaomakase.co.il/reviews.html)
+- [Pizza workshops](https://pizzaomakase.co.il/workshops.html)
