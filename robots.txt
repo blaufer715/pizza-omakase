@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /thank-you.html
-Disallow: /request-received.html
+Disallow: /thank-you
+Disallow: /request-received
 
 Sitemap: https://pizzaomakase.co.il/sitemap.xml
