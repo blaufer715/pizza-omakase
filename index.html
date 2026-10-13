@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#B5321F">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FoodEstablishment", "@id": "https://pizzaomakase.co.il/#business", "name": "Pizza Omakase", "url": "https://pizzaomakase.co.il/", "image": ["https://pizzaomakase.co.il/images/originals/classic.jpg", "https://pizzaomakase.co.il/images/pizza-vodka.webp", "https://pizzaomakase.co.il/images/pizza-spinach-artichoke.webp", "https://pizzaomakase.co.il/images/pizza-pear-hot-honey.webp", "https://pizzaomakase.co.il/images/pizza-mushroom.webp", "https://pizzaomakase.co.il/images/pizza-margherita-burrata.webp", "https://pizzaomakase.co.il/images/pizza-pesto-olive.webp"], "logo": "https://pizzaomakase.co.il/favicon.svg", "description": "Pizza Omakase is a chef's-choice New York–style pizza tasting experience in Israel: an appetizer, five unique pies, dessert and wine at one intimate table. Seats at scheduled evenings in Jaffa, private events, and pizza-making workshops.", "servesCuisine": ["Pizza", "New York-style pizza"], "areaServed": [{"@type": "City", "name": "Tel Aviv-Yafo"}, {"@type": "Country", "name": "Israel"}], "acceptsReservations": true, "knowsLanguage": ["en", "he"], "hasMenu": {"@type": "Menu", "name": "Pizza Omakase tasting", "description": "Chef's choice: appetizer, five unique pies, dessert and wine."}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FoodEstablishment", "@id": "https://pizzaomakase.co.il/#business", "name": "Pizza Omakase", "url": "https://pizzaomakase.co.il/", "image": ["https://pizzaomakase.co.il/images/originals/classic.jpg", "https://pizzaomakase.co.il/images/pizza-vodka.webp", "https://pizzaomakase.co.il/images/pizza-spinach-artichoke.webp", "https://pizzaomakase.co.il/images/pizza-pear-hot-honey.webp", "https://pizzaomakase.co.il/images/pizza-mushroom.webp", "https://pizzaomakase.co.il/images/pizza-margherita-burrata.webp", "https://pizzaomakase.co.il/images/pizza-pesto-olive.webp"], "logo": "https://pizzaomakase.co.il/favicon.svg", "description": "Pizza Omakase is a chef's-choice New York–style pizza tasting experience in Israel: an appetizer, five unique pies, dessert and wine at one intimate table. Seats at scheduled evenings in Jaffa, private events, and pizza-making workshops.", "servesCuisine": ["Pizza", "New York-style pizza"], "areaServed": [{"@type": "City", "name": "Tel Aviv-Yafo"}, {"@type": "Country", "name": "Israel"}], "acceptsReservations": true, "priceRange": "₪150 per seat", "knowsLanguage": ["en", "he"], "hasMenu": {"@type": "Menu", "name": "Pizza Omakase tasting", "description": "Chef's choice: appetizer, five unique pies, dessert and wine."}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -101,6 +101,8 @@ section.alt{background:var(--soft)}
 @media (min-width:701px){#pies{background-color:#FBF7F0;background-image:linear-gradient(90deg,rgba(190,30,40,.55) 50%,transparent 50%),linear-gradient(rgba(190,30,40,.55) 50%,transparent 50%);background-size:clamp(36px,5vw,56px) clamp(36px,5vw,56px);box-shadow:inset 0 0 80px rgba(60,20,10,.18)}}
 .sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(28px,4vw,44px)}
 .fine{font-size:.92rem;color:var(--muted)}
+.price-line{font-family:var(--display);font-size:1.15rem}.price-line b{color:var(--tomato);font-size:1.5rem}
+.total{font-family:var(--display);font-weight:700;font-size:1.1rem;margin:4px 0 2px}
 
 /* tasting card */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
@@ -253,7 +255,7 @@ footer .wrap a:hover{color:var(--ink)}
 
   <section id="dates">
     <div class="wrap">
-      <div class="sec-head"><h2>Upcoming evenings</h2><p class="fine">Exact location to be shared after reservation is complete</p></div>
+      <div class="sec-head"><h2>Upcoming evenings</h2><p class="price-line"><b>₪150</b> per seat</p><p class="fine">Exact location to be shared after reservation is complete. Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p></div>
       <p class="notice" id="eventsNotice" hidden></p>
       <div class="events" id="eventsList" aria-live="polite">
         <p class="empty">Loading dates…</p>
@@ -288,6 +290,8 @@ footer .wrap a:hover{color:var(--ink)}
           <input id="r-diet" name="dietary">
         </div>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="total" id="r-total" aria-live="polite">Total: ₪300 · 2 seats × ₪150</p>
+        <p class="fine">Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p>
         <button class="btn primary" type="submit">Send request</button>
         <p class="status" role="status" hidden></p>
       </form>
@@ -341,6 +345,7 @@ const FORM_ENDPOINT  = "";
    Past dates hide automatically. Set seats_left to "0" or status to "full" for a waitlist.
    pay_link: paste that evening's Morning payment link to make its button "Reserve & pay".
              Leave it "" and the button opens the request form instead. */
+const PRICE = 150; // ₪ per seat (an evening can override it with its own price)
 const EXAMPLE_EVENTS = [
   {date: "2026-10-21", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""},
   {date: "2026-10-28", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""}
@@ -396,7 +401,7 @@ function addEventSchema(events){
       "image":[SITE+"images/originals/classic.jpg"],
       "organizer":{"@type":"Organization","name":"Pizza Omakase","url":SITE},
       "offers":{"@type":"Offer","url":(e.pay_link||SITE+"#dates"),"priceCurrency":"ILS","availability":full?"https://schema.org/SoldOut":"https://schema.org/InStock"}};
-    if(e.price) ev.offers.price=e.price;
+    ev.offers.price=e.price||PRICE;
     return ev;
   });
   if(!data.length) return;
@@ -427,7 +432,7 @@ function renderEvents(events){
       .forEach(([c,t])=>{const s=document.createElement("span");s.className=c;s.textContent=t;date.appendChild(s)});
     const info=document.createElement("div");info.className="info";
     const h=document.createElement("h3");h.textContent=e.location;
-    const m=document.createElement("p");m.className="meta";m.textContent=e.time;
+    const m=document.createElement("p");m.className="meta";m.textContent=`${e.time} · ₪${e.price||PRICE} per seat`;
     info.append(h,m);
     const act=document.createElement("div");act.className="act";
     const pill=document.createElement("span");
@@ -491,6 +496,9 @@ function wireForm(form, okText){
 }
 
 wireForm(document.getElementById("reserveForm"),"Got it. I'll be in touch to confirm.");
+(()=>{const g=document.getElementById("r-guests"),t=document.getElementById("r-total");
+  const upd=()=>{const n=parseInt(g.value,10)||1;t.textContent=`Total: ₪${n*PRICE} · ${n} seat${n===1?"":"s"} × ₪${PRICE}`};
+  g.addEventListener("change",upd);upd()})();
 loadEvents();
 
 /* Home / About views. #about shows the About page; any other link returns home and scrolls to its section. */
