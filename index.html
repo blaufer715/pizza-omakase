@@ -350,7 +350,9 @@ const PRICE = 150; // ₪ per seat (an evening can override it with its own pric
 const EXAMPLE_EVENTS = [
   {date: "2026-11-11", time: "20:00", title: "Vegan Pizza Omakase", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/Jdc7gMnJVl"},
   {date: "2026-11-18", time: "20:00", title: "Pizza Omakase", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/4sXIoniPWg"},
-  {date: "2026-11-25", time: "20:00", title: "Pizza Omakase: 5 styles of pizza from Italy to America", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/SbXQcux80n"}
+  {date: "2026-11-25", time: "20:00", title: "Pizza Omakase: 5 styles of pizza from Italy to America", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/SbXQcux80n"},
+  /* TEMPORARY ₪5 test evening: only shown at pizzaomakase.co.il/?test — remove after testing */
+  {date: "2026-12-01", time: "20:00", title: "TEST · ₪5 payment test", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", price: "5", test: true, pay_link: "https://mrng.to/Ielsvdc4tQ"}
 ];
 
 function isoIn(days){const d=new Date();d.setDate(d.getDate()+days);return d.toISOString().slice(0,10)}
@@ -384,7 +386,7 @@ async function loadEvents(){
     events=EXAMPLE_EVENTS;
   }
   const today=new Date().toISOString().slice(0,10);
-  events=events.filter(e=>e.date && e.date>=today).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  events=events.filter(e=>e.date && e.date>=today && (!e.test||new URLSearchParams(location.search).has("test"))).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
   renderEvents(events);
   addEventSchema(events);
 }
