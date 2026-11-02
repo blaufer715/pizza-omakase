@@ -230,7 +230,7 @@ footer .wrap a:hover{color:var(--ink)}
         </ul>
         </div>
         <div class="ctas">
-          <a class="btn primary" href="#book">Book a seat</a>
+          <a class="btn primary" href="#dates">Book a seat</a>
           <a class="btn" href="private-events.html">Private events</a>
         </div>
       </div>
@@ -309,7 +309,7 @@ footer .wrap a:hover{color:var(--ink)}
         <p>After making aliyah, I went to culinary school at Danon in Tel Aviv, where my passion for cooking and flavor kept growing.</p>
         <p>It started with experimenting with pizza at home. More and more friends heard about it and asked to join, and it grew into something bigger: Pizza Omakase.</p>
         <div class="ctas">
-          <a class="btn primary" href="#book">Book a seat</a>
+          <a class="btn primary" href="#dates">Book a seat</a>
           <a class="btn" href="private-events.html">Private events</a>
         </div>
       </div>
@@ -345,10 +345,12 @@ const FORM_ENDPOINT  = "";
    Past dates hide automatically. Set seats_left to "0" or status to "full" for a waitlist.
    pay_link: paste that evening's Morning payment link to make its button "Reserve & pay".
              Leave it "" and the button opens the request form instead. */
+const PAY_BY_EVENT = {};
 const PRICE = 150; // ₪ per seat (an evening can override it with its own price)
 const EXAMPLE_EVENTS = [
-  {date: "2026-10-21", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""},
-  {date: "2026-10-28", time: "20:00", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: ""}
+  {date: "2026-11-11", time: "20:00", title: "Vegan Pizza Omakase", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/Jdc7gMnJVl"},
+  {date: "2026-11-18", time: "20:00", title: "Pizza Omakase", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/4sXIoniPWg"},
+  {date: "2026-11-25", time: "20:00", title: "Pizza Omakase: 5 styles of pizza from Italy to America", location: "Northern Jaffa", seats_left: "8", status: "open", note: "", pay_link: "https://mrng.to/SbXQcux80n"}
 ];
 
 function isoIn(days){const d=new Date();d.setDate(d.getDate()+days);return d.toISOString().slice(0,10)}
@@ -390,11 +392,12 @@ async function loadEvents(){
 /* Lets Google and AI assistants list each evening as an event. */
 function addEventSchema(events){
   const SITE="https://pizzaomakase.co.il/";
+  const ilOffset=ds=>{try{const n=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Jerusalem",timeZoneName:"shortOffset"}).formatToParts(new Date(ds+"T12:00:00Z")).find(p=>p.type==="timeZoneName").value.match(/[+-]\d+/);return n?(n[0][0]+String(Math.abs(+n[0])).padStart(2,"0")+":00"):"+02:00"}catch(_){return "+02:00"}};
   const data=events.map(e=>{
     const full=(e.status||"").toLowerCase()==="full"||e.seats_left==="0";
-    const ev={"@type":"Event","name":"Pizza Omakase · "+e.location,
+    const ev={"@type":"Event","name":(e.title||"Pizza Omakase")+" · "+e.location,
       "description":"Chef's-choice New York–style pizza tasting: an appetizer, five unique pies, dessert and wine at one intimate table.",
-      "startDate":e.date+"T"+(e.time||"20:00")+":00+03:00",
+      "startDate":e.date+"T"+(e.time||"20:00")+":00"+ilOffset(e.date),
       "eventStatus":"https://schema.org/EventScheduled",
       "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
       "location":{"@type":"Place","name":e.location,"address":{"@type":"PostalAddress","addressLocality":e.location,"addressCountry":"IL"}},
@@ -424,15 +427,16 @@ function renderEvents(events){
     const d=new Date(e.date+"T12:00:00");
     const full=(e.status||"").toLowerCase()==="full"||e.seats_left==="0";
     const left=parseInt(e.seats_left,10);
-    const label=`${d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})} · ${e.time} · ${e.location}`;
+    const title=e.title||"Pizza Omakase";
+    const label=`${d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})} · ${e.time} · ${title}`;
 
     const row=document.createElement("article");row.className="event";
     const date=document.createElement("div");date.className="date";
     [["dow",d.toLocaleDateString("en-GB",{weekday:"short"})],["day",String(d.getDate())],["mon",d.toLocaleDateString("en-GB",{month:"short"})]]
       .forEach(([c,t])=>{const s=document.createElement("span");s.className=c;s.textContent=t;date.appendChild(s)});
     const info=document.createElement("div");info.className="info";
-    const h=document.createElement("h3");h.textContent=e.location;
-    const m=document.createElement("p");m.className="meta";m.textContent=`${e.time} · ₪${e.price||PRICE} per seat`;
+    const h=document.createElement("h3");h.textContent=title;
+    const m=document.createElement("p");m.className="meta";m.textContent=`${e.time} · ${e.location} · ₪${e.price||PRICE} per seat`;
     info.append(h,m);
     const act=document.createElement("div");act.className="act";
     const pill=document.createElement("span");
@@ -442,7 +446,7 @@ function renderEvents(events){
     const pay=!full&&/^https:\/\//.test(e.pay_link||"")?e.pay_link:"";
     let b;
     if(pay){
-      b=document.createElement("a");b.className="btn small primary";b.href=pay;b.target="_blank";b.rel="noopener";
+      b=document.createElement("a");b.className="btn small primary";b.href=pay;
       b.textContent="Reserve & pay";
     }else{
       b=document.createElement("button");b.type="button";b.className="btn small"+(full?"":" primary");
@@ -452,6 +456,7 @@ function renderEvents(events){
     act.append(pill,b);
     row.append(date,info,act);list.appendChild(row);
 
+    if(pay) PAY_BY_EVENT[label]=pay;
     const o=document.createElement("option");o.value=label+(full?" (waitlist)":"");o.textContent=label+(full?" — full, join waitlist":"");sel.appendChild(o);
   }
 }
@@ -459,6 +464,9 @@ function renderEvents(events){
 function wireForm(form, okText){
   const status=form.querySelector(".status");
   const btn=form.querySelector("button[type=submit]");
+  const sel=form.querySelector("#r-event");
+  const setBtn=()=>{btn.textContent=sel&&PAY_BY_EVENT[sel.value]?"Continue to payment":"Send request"};
+  if(sel) sel.addEventListener("change",setBtn);
   form.addEventListener("submit",async ev=>{
     ev.preventDefault();
     const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
@@ -484,13 +492,15 @@ function wireForm(form, okText){
       }
       const res=await fetch(url,{method:"POST",headers:{Accept:"application/json"},body:data});
       if(!res.ok) throw new Error(res.status);
+      const payUrl=PAY_BY_EVENT[data.get("evening")];
       form.reset();
+      if(payUrl){status.hidden=false;status.className="status ok";status.textContent="Thanks! Taking you to payment…";location.href=payUrl;return;}
       status.hidden=false;status.className="status ok";status.textContent=okText;
     }catch(e){
       status.hidden=false;status.className="status err";
       status.textContent="Didn't go through. Please try again.";
     }finally{
-      btn.disabled=false;btn.textContent="Send request";
+      btn.disabled=false;setBtn();
     }
   });
 }
