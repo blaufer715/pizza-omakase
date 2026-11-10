@@ -331,17 +331,17 @@ footer .wrap a:hover{color:var(--ink)}
 <script>
 /* ===================== SETTINGS (edit these two lines) =====================
    EVENTS_CSV_URL: your Google Sheet, published as CSV (File → Share → Publish to web → CSV).
-                   Columns: date | time | location | seats_left | status | note | pay_link
+                   Columns: date | time | title | location | seats_left | status | price | pay_link | note
                    date as YYYY-MM-DD, status = open / full (leave blank for open).
    WEB3FORMS_KEY:  your Web3Forms access key (emailed to you by web3forms.com). Used if filled in.
    FORM_ENDPOINT:  or, instead, a Formspree form URL, e.g. https://formspree.io/f/abcdwxyz
                    Every reservation and private-event request is emailed to you.
 ============================================================================ */
-const EVENTS_CSV_URL = "";
+const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJIR6Vepet6Y2UDRExhSLIXeEjG2Xf9GtXmF34XiUtwmNr2so5jNAj9eTIJwAHDrVMnOuB5fs/pub?gid=0&single=true&output=csv"; // Google Sheet "Pizza Omakase – Evenings & Seats"
 const WEB3FORMS_KEY  = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
 const FORM_ENDPOINT  = "";
 
-/* Dates shown while no Google Sheet is connected. Edit, add or remove lines here.
+/* Backup dates, shown only if the Google Sheet can't be reached. Keep roughly in sync with the sheet. Edit, add or remove lines here.
    Past dates hide automatically. Set seats_left to "0" or status to "full" for a waitlist.
    pay_link: paste that evening's Morning payment link to make its button "Reserve & pay".
              Leave it "" and the button opens the request form instead. */
@@ -377,7 +377,7 @@ async function loadEvents(){
     try{
       const res=await fetch(EVENTS_CSV_URL,{cache:"no-store"});
       if(!res.ok) throw new Error(res.status);
-      events=parseCSV(await res.text());
+      events=parseCSV(await res.text()).map(e=>({...e,time:(e.time||"").slice(0,5)}));
     }catch(e){ events=null; }
   }
   if(!events){
