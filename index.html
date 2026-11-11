@@ -164,6 +164,8 @@ section.alt{background:var(--soft)}
 .pill.full{color:var(--muted)}
 .event .act{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .empty{padding:28px 0;color:var(--muted)}
+.private-row{background:var(--soft);border-bottom:2px solid var(--ink);padding-inline:clamp(12px,2vw,20px);margin-top:-1px}
+.private-row .day{color:var(--tomato)}
 @media (max-width:640px){.event{grid-template-columns:64px 1fr}.event .act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.date .day{font-size:2.1rem}}
 
 /* forms */
@@ -261,6 +263,17 @@ footer .wrap a:hover{color:var(--ink)}
       <div class="events" id="eventsList" aria-live="polite">
         <p class="empty">Loading dates…</p>
       </div>
+      <article class="event private-row">
+        <div class="date"><span class="dow">Any</span><span class="day">★</span><span class="mon">Date</span></div>
+        <div class="info">
+          <h3>Book a private evening</h3>
+          <p class="meta">The full Pizza Omakase for your group, on a date you choose · ₪1,200 for up to 8 guests</p>
+        </div>
+        <div class="act">
+          <span class="pill open">Up to 8 guests</span>
+          <a class="btn small primary" href="private-events.html">Request a date</a>
+        </div>
+      </article>
     </div>
   </section>
 
