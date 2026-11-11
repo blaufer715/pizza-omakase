@@ -233,13 +233,45 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     </div>
   </div>
 
-  <section class="alt">
+  <section id="book-private">
     <div class="wrap pe-form">
-      <form class="panel" id="private" novalidate>
-        <h2 class="form-title">Book a private evening</h2>
+      <form class="panel" id="bookPrivate" novalidate>
+        <h2 class="form-title">Book a private Pizza Omakase</h2>
         <p class="pe-price"><b>₪1,200</b> for up to 8 guests</p>
         <p class="fine">Pick a date, then pay to confirm it.</p>
         <input type="hidden" name="_subject" value="New private evening booking">
+        <input type="hidden" name="form" value="private-booking">
+        <div class="row">
+          <div class="field"><label for="b-name">Name</label><input id="b-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="b-phone">Phone</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
+        </div>
+        <div class="field"><label for="b-email">Email</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="row">
+          <div class="field"><label for="b-date">Date</label><select id="b-date" name="date" required><option value="">Loading dates…</option></select></div>
+          <div class="field"><label for="b-guests">Guests</label><select id="b-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
+        </div>
+        <div class="field" id="b-req-wrap" hidden>
+          <label for="b-reqdate">Which date would you like?</label>
+          <input id="b-reqdate" name="requested_date" type="date">
+          <p class="fine">We'll check availability and get back to you. No payment is taken for a request.</p>
+        </div>
+        <div class="field">
+          <label for="b-msg">Allergies or notes <span class="opt">(optional)</span></label>
+          <textarea id="b-msg" name="message"></textarea>
+        </div>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="fine">Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p>
+        <button class="btn primary" type="submit">Continue to payment · ₪1,200</button>
+        <p class="status" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap pe-form">
+      <form class="panel" id="private" novalidate>
+        <h2 class="form-title">Private events</h2>
+        <input type="hidden" name="_subject" value="New private event request">
         <input type="hidden" name="form" value="private-event">
         <div class="row">
           <div class="field"><label for="p-name">Name</label><input id="p-name" name="name" autocomplete="name" required></div>
@@ -247,13 +279,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         </div>
         <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
         <div class="row">
-          <div class="field"><label for="p-date">Date</label><select id="p-date" name="date" required><option value="">Loading dates…</option></select></div>
-          <div class="field"><label for="p-guests">Guests</label><select id="p-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
-        </div>
-        <div class="field" id="req-wrap" hidden>
-          <label for="p-reqdate">Which date would you like?</label>
-          <input id="p-reqdate" name="requested_date" type="date">
-          <p class="fine">We'll check availability and get back to you. No payment is taken for a request.</p>
+          <div class="field"><label for="p-date">Date</label><input id="p-date" name="date" type="date" required></div>
+          <div class="field"><label for="p-guests">Guests</label><input id="p-guests" name="guests" type="number" min="2" max="80" inputmode="numeric" required></div>
         </div>
         <div class="field"><label for="p-city">Location</label><input id="p-city" name="location" required></div>
         <div class="field">
@@ -261,8 +288,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
           <textarea id="p-msg" name="message"></textarea>
         </div>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="fine">Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p>
-        <button class="btn primary" type="submit">Continue to payment · ₪1,200</button>
+        <button class="btn primary" type="submit">Send request</button>
         <p class="status" role="status" hidden></p>
       </form>
     </div>
@@ -279,44 +305,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 const WEB3FORMS_KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
 const form=document.getElementById("private");
 const status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
-const PRIVATE_PAY_LINK = "https://mrng.to/uQAEgTNSwF"; // Morning: ₪1,200 private evening
-const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJIR6Vepet6Y2UDRExhSLIXeEjG2Xf9GtXmF34XiUtwmNr2so5jNAj9eTIJwAHDrVMnOuB5fs/pub?gid=0&single=true&output=csv";
-const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3;
 const pDate=document.getElementById("p-date");
-/* The next 3 open Tuesdays at least 5 days from today (Israel time), skipping any date the sheet marks as taken
-   (a row with status "private", or any evening already scheduled that day). */
-(async()=>{
-  const taken=new Set();
-  try{
-    const txt=await (await fetch(EVENTS_CSV_URL,{cache:"no-store"})).text();
-    const rows=txt.trim().split(/\r?\n/).map(l=>l.split(","));
-    const head=rows.shift().map(h=>h.trim().toLowerCase());
-    const di=head.indexOf("date");
-    rows.forEach(r=>{if(r[di]) taken.add(r[di].trim())});
-  }catch(_){}
-  const ilToday=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Jerusalem"}).format(new Date());
-  const d=new Date(ilToday+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+MIN_DAYS_AHEAD);
-  while(d.getUTCDay()!==2) d.setUTCDate(d.getUTCDate()+1);
-  pDate.innerHTML='<option value="">Choose a date…</option>';
-  for(let shown=0,i=0;shown<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
-    const iso=d.toISOString().slice(0,10);
-    if(taken.has(iso)) continue;
-    shown++;
-    const o=document.createElement("option");o.value=iso;
-    o.textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
-    pDate.appendChild(o);
-  }
-  const req=document.createElement("option");req.value="request";req.textContent="Don't see your date? Request another…";
-  pDate.appendChild(req);
-})();
-const reqWrap=document.getElementById("req-wrap"), reqDate=document.getElementById("p-reqdate");
-const PAY_LABEL="Continue to payment · ₪1,200", REQ_LABEL="Send date request";
-{const t=new Date();t.setDate(t.getDate()+1);reqDate.min=t.toISOString().slice(0,10)}
-const isRequest=()=>pDate.value==="request";
-pDate.addEventListener("change",()=>{
-  reqWrap.hidden=!isRequest(); reqDate.required=isRequest();
-  btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL;
-});
+{const d=new Date();d.setDate(d.getDate()+1);pDate.min=d.toISOString().slice(0,10)}
 form.addEventListener("submit",async ev=>{
   ev.preventDefault();
   const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
@@ -329,8 +319,67 @@ form.addEventListener("submit",async ev=>{
   try{
     const data=new FormData(form);
     data.append("access_key",WEB3FORMS_KEY);
-    const request=isRequest();
+    data.append("subject","Pizza Omakase · private event request");
+    data.append("from_name","Pizza Omakase website");
+    const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
+    if(!res.ok) throw new Error(res.status);
+    form.reset();
+    location.href="request-received.html";
+  }catch(e){
+    status.hidden=false;status.className="status err";
+    status.textContent="Didn't go through. Please try again.";
+    btn.disabled=false;btn.textContent="Send request";
+  }
+});
+</script>
+<script>
+/* Private Pizza Omakase booking: the next 3 open Tuesdays at least 5 days ahead (Israel time),
+   skipping any date already in the Google Sheet; booking goes straight to the ₪1,200 Morning link. */
+(()=>{
+const PRIVATE_PAY_LINK = "https://mrng.to/uQAEgTNSwF";
+const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJIR6Vepet6Y2UDRExhSLIXeEjG2Xf9GtXmF34XiUtwmNr2so5jNAj9eTIJwAHDrVMnOuB5fs/pub?gid=0&single=true&output=csv";
+const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3, KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
+const form=document.getElementById("bookPrivate"), status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
+const sel=document.getElementById("b-date"), reqWrap=document.getElementById("b-req-wrap"), reqDate=document.getElementById("b-reqdate");
+const PAY_LABEL="Continue to payment · ₪1,200", REQ_LABEL="Send date request";
+const isRequest=()=>sel.value==="request";
+(async()=>{
+  const taken=new Set();
+  try{
+    const rows=(await (await fetch(EVENTS_CSV_URL,{cache:"no-store"})).text()).trim().split(/\r?\n/).map(l=>l.split(","));
+    const di=rows.shift().map(h=>h.trim().toLowerCase()).indexOf("date");
+    rows.forEach(r=>{if(r[di]) taken.add(r[di].trim())});
+  }catch(_){}
+  const ilToday=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Jerusalem"}).format(new Date());
+  const d=new Date(ilToday+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+MIN_DAYS_AHEAD);
+  while(d.getUTCDay()!==2) d.setUTCDate(d.getUTCDate()+1);
+  sel.innerHTML='<option value="">Choose a date…</option>';
+  for(let shown=0,i=0;shown<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
+    const iso=d.toISOString().slice(0,10);
+    if(taken.has(iso)) continue;
+    shown++;
+    const o=document.createElement("option");o.value=iso;
+    o.textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
+    sel.appendChild(o);
+  }
+  const o=document.createElement("option");o.value="request";o.textContent="Don't see your date? Request another…";sel.appendChild(o);
+})();
+{const t=new Date();t.setDate(t.getDate()+1);reqDate.min=t.toISOString().slice(0,10)}
+sel.addEventListener("change",()=>{reqWrap.hidden=!isRequest();reqDate.required=isRequest();btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL});
+form.addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
+  if(missing){
+    status.hidden=false;status.className="status err";
+    status.textContent=`Please fill in "${form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()}" before sending.`;
+    missing.focus();return;
+  }
+  btn.disabled=true;btn.textContent="Sending…";
+  const request=isRequest();
+  try{
+    const data=new FormData(form);
     if(request) data.set("date","REQUEST: "+data.get("requested_date"));
+    data.append("access_key",KEY);
     data.append("subject",request?"Pizza Omakase · private evening DATE REQUEST · "+data.get("requested_date"):"Pizza Omakase · PRIVATE EVENING booking · "+data.get("date"));
     data.append("from_name","Pizza Omakase website");
     const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
@@ -340,11 +389,11 @@ form.addEventListener("submit",async ev=>{
     status.hidden=false;status.className="status ok";status.textContent="Thanks! Taking you to payment…";
     location.href=PRIVATE_PAY_LINK;
   }catch(e){
-    status.hidden=false;status.className="status err";
-    status.textContent="Didn't go through. Please try again.";
-    btn.disabled=false;btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL;
+    status.hidden=false;status.className="status err";status.textContent="Didn't go through. Please try again.";
+    btn.disabled=false;btn.textContent=request?REQ_LABEL:PAY_LABEL;
   }
 });
+})();
 </script>
 </body>
 </html>

@@ -164,8 +164,14 @@ section.alt{background:var(--soft)}
 .pill.full{color:var(--muted)}
 .event .act{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .empty{padding:28px 0;color:var(--muted)}
-.private-row{background:var(--soft);border-bottom:2px solid var(--ink);padding-inline:clamp(12px,2vw,20px);margin-top:-1px}
-.private-row .day{color:var(--tomato)}
+.private-card{margin-top:clamp(48px,7vw,80px);background:#14110D;color:#F1E9DA;border:1px solid #6E5A35;outline:1px solid #6E5A35;outline-offset:-8px;border-radius:2px;padding:clamp(36px,6vw,64px) clamp(24px,5vw,56px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;background-image:radial-gradient(ellipse at top,rgba(201,164,92,.16),transparent 65%)}
+.private-card .pc-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#C9A45C;margin:0}
+.private-card h3{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.02em;color:#F7F1E6;margin:0}
+.private-card .pc-text{font-size:1.02rem;color:#CFC5B3;margin:0;max-width:34ch}
+.private-card .pc-meta{display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#C9A45C;margin:6px 0 10px}
+.private-card .pc-price{font-family:var(--display);font-size:1.5rem;letter-spacing:0;color:#F7F1E6}
+.private-card .pc-btn{display:inline-block;padding:13px 28px;border:1px solid #C9A45C;color:#F1E9DA;text-decoration:none;font-family:var(--display);font-weight:600;letter-spacing:.04em;border-radius:999px;transition:background .2s,color .2s}
+.private-card .pc-btn:hover,.private-card .pc-btn:focus-visible{background:#C9A45C;color:#14110D}
 @media (max-width:640px){.event{grid-template-columns:64px 1fr}.event .act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.date .day{font-size:2.1rem}}
 
 /* forms */
@@ -263,17 +269,13 @@ footer .wrap a:hover{color:var(--ink)}
       <div class="events" id="eventsList" aria-live="polite">
         <p class="empty">Loading dates…</p>
       </div>
-      <article class="event private-row">
-        <div class="date"><span class="dow">Any</span><span class="day">★</span><span class="mon">Date</span></div>
-        <div class="info">
-          <h3>Book a private evening</h3>
-          <p class="meta">The full Pizza Omakase for your group on a date you choose · ₪1,200 for up to 8 guests</p>
-        </div>
-        <div class="act">
-          <span class="pill open">Up to 8 guests</span>
-          <a class="btn small primary" href="private-events.html#private">Book a date</a>
-        </div>
-      </article>
+      <aside class="private-card" aria-label="Private evening">
+        <p class="pc-eyebrow">By reservation · Private</p>
+        <h3>A private Pizza Omakase</h3>
+        <p class="pc-text">The full chef-guided tasting, for your guests only.</p>
+        <p class="pc-meta"><span>Up to 8 guests</span><span class="pc-dot">·</span><span class="pc-price">₪1,200</span></p>
+        <a class="pc-btn" href="private-events.html#book-private">Reserve your evening</a>
+      </aside>
     </div>
   </section>
 
