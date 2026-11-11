@@ -138,6 +138,7 @@ section.alt{background:var(--soft)}
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .gallery img{min-width:0}
 .form-title{font-size:2rem}
+.form-lede{color:var(--muted);font-size:1.05rem;line-height:1.5;margin:-4px 0 6px}
 .gallery figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
 .gallery img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius);display:block}
 .gallery figcaption{font-family:var(--display);font-weight:600;font-size:1rem}
@@ -244,7 +245,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
       <div class="copy">
         <p class="eyebrow">Private events</p>
         <h1>Pizza Omakase<br><em>for your group.</em></h1>
-        <p class="lede">A private, chef-guided pizza evening built around your event. Every menu is customized for you, so tell us about the occasion and we'll design it together.</p>
       </div>
       <figure>
         <img src="images/pizza-vodka.webp" alt="The Vodka pie" width="900" height="900">
@@ -292,7 +292,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
   <section class="alt">
     <div class="wrap pe-form">
       <form class="panel" id="private" novalidate>
-        <h2 class="form-title">Private events</h2>
+        <h2 class="form-title">Book your custom private event</h2>
+        <p class="form-lede">A private, chef-guided pizza evening built around your event. Every menu is customized for you, so tell us about the occasion and we'll design it together.</p>
         <input type="hidden" name="_subject" value="New private event request">
         <input type="hidden" name="form" value="private-event">
         <div class="row">
