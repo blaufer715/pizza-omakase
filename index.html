@@ -164,14 +164,14 @@ section.alt{background:var(--soft)}
 .pill.full{color:var(--muted)}
 .event .act{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .empty{padding:28px 0;color:var(--muted)}
-.private-card{margin-top:clamp(48px,7vw,80px);background:#14110D;color:#F1E9DA;border:1px solid #6E5A35;outline:1px solid #6E5A35;outline-offset:-8px;border-radius:2px;padding:clamp(36px,6vw,64px) clamp(24px,5vw,56px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;background-image:radial-gradient(ellipse at top,rgba(201,164,92,.16),transparent 65%)}
-.private-card .pc-eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:#C9A45C;margin:0}
-.private-card h3{font-family:var(--display);font-weight:700;font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.02em;color:#F7F1E6;margin:0}
-.private-card .pc-text{font-size:1.02rem;color:#CFC5B3;margin:0;max-width:34ch}
-.private-card .pc-meta{display:flex;gap:10px;align-items:baseline;font-family:var(--mono);font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#C9A45C;margin:6px 0 10px}
-.private-card .pc-price{font-family:var(--display);font-size:1.5rem;letter-spacing:0;color:#F7F1E6}
-.private-card .pc-btn{display:inline-block;padding:13px 28px;border:1px solid #C9A45C;color:#F1E9DA;text-decoration:none;font-family:var(--display);font-weight:600;letter-spacing:.04em;border-radius:999px;transition:background .2s,color .2s}
+.private-card{width:50%;margin:clamp(40px,6vw,64px) auto 0;background:#14110D;color:#F1E9DA;border:1px solid #6E5A35;outline:1px solid #6E5A35;outline-offset:-6px;border-radius:2px;padding:clamp(24px,3.5vw,36px) clamp(18px,3vw,32px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;background-image:radial-gradient(ellipse at top,rgba(201,164,92,.16),transparent 65%)}
+.private-card h3{font-family:var(--display);font-weight:700;font-size:clamp(1.25rem,2.4vw,1.6rem);letter-spacing:-.02em;color:#F7F1E6;margin:0}
+.private-card .pc-text{font-size:.92rem;color:#CFC5B3;margin:0;max-width:32ch}
+.private-card .pc-meta{display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#C9A45C;margin:2px 0 6px}
+.private-card .pc-price{font-family:var(--display);font-size:1.2rem;letter-spacing:0;color:#F7F1E6}
+.private-card .pc-btn{display:inline-block;padding:9px 22px;border:1px solid #C9A45C;color:#F1E9DA;text-decoration:none;font-family:var(--display);font-weight:600;font-size:.92rem;letter-spacing:.04em;border-radius:999px;transition:background .2s,color .2s}
 .private-card .pc-btn:hover,.private-card .pc-btn:focus-visible{background:#C9A45C;color:#14110D}
+@media (max-width:700px){.private-card{width:min(100%,380px)}}
 @media (max-width:640px){.event{grid-template-columns:64px 1fr}.event .act{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.date .day{font-size:2.1rem}}
 
 /* forms */
@@ -270,7 +270,6 @@ footer .wrap a:hover{color:var(--ink)}
         <p class="empty">Loading dates…</p>
       </div>
       <aside class="private-card" aria-label="Private evening">
-        <p class="pc-eyebrow">By reservation · Private</p>
         <h3>A private Pizza Omakase</h3>
         <p class="pc-text">The full chef-guided tasting, for your guests only.</p>
         <p class="pc-meta"><span>Up to 8 guests</span><span class="pc-dot">·</span><span class="pc-price">₪1,200</span></p>
