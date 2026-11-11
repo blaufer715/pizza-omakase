@@ -290,5 +290,10 @@ form.addEventListener("submit",async ev=>{
   }
 });
 </script>
+<script>
+if(new URLSearchParams(location.search).has("private")){
+  const h=document.querySelector("h1 em"); if(h) h.textContent="Your private evening is booked.";
+}
+</script>
 </body>
 </html>
