@@ -200,7 +200,25 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 .pe-hero figure{margin:0}
 .pe-hero figure img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
 .pe-form{max-width:680px;margin-inline:auto}
-.pe-price{font-family:var(--display);font-size:1.1rem;margin:-4px 0 6px}.pe-price b{color:var(--tomato);font-size:1.5rem}
+.private-card{width:50%;margin:0 auto;background:#14110D;color:#F1E9DA;border:1px solid #6E5A35;outline:1px solid #6E5A35;outline-offset:-6px;border-radius:2px;padding:clamp(24px,3.5vw,36px) clamp(18px,3vw,32px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;background-image:radial-gradient(ellipse at top,rgba(201,164,92,.16),transparent 65%)}
+.private-card h3{font-family:var(--display);font-weight:700;font-size:clamp(1.25rem,2.4vw,1.6rem);letter-spacing:-.02em;color:#F7F1E6;margin:0}
+.private-card .pc-text{font-size:.92rem;color:#CFC5B3;margin:0;max-width:32ch}
+.private-card .pc-meta{display:flex;gap:8px;align-items:baseline;font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#C9A45C;margin:2px 0 6px}
+.private-card .pc-price{font-family:var(--display);font-size:1.2rem;letter-spacing:0;color:#F7F1E6}
+.private-card .pc-btn{display:inline-block;padding:9px 22px;border:1px solid #C9A45C;background:transparent;color:#F1E9DA;cursor:pointer;text-decoration:none;font-family:var(--display);font-weight:600;font-size:.92rem;letter-spacing:.04em;border-radius:999px;transition:background .2s,color .2s}
+.private-card .pc-btn:hover,.private-card .pc-btn:focus-visible,.private-card .pc-btn[aria-expanded="true"]{background:#C9A45C;color:#14110D}
+.pc-form{width:100%;text-align:left;display:flex;flex-direction:column;gap:12px;margin-top:14px;padding-top:18px;border-top:1px solid #3B3122}
+.pc-form[hidden],.private-card [hidden]{display:none!important}
+.pc-form label{color:#E9DFCC;font-size:.85rem}
+.pc-form label .opt,.pc-form .fine{color:#A89B84}
+.pc-form .fine{font-size:.8rem;margin:0}
+.pc-form input,.pc-form select,.pc-form textarea{background:#1D1913;color:#F1E9DA;border-color:#4A3D28;font-size:.95rem;padding:9px 10px}
+.pc-form input:focus,.pc-form select:focus,.pc-form textarea:focus{outline:2px solid #C9A45C;outline-offset:1px}
+.pc-form textarea{min-height:70px}
+.pc-form .row{gap:10px}
+.pc-form .btn.primary{background:#C9A45C;border-color:#C9A45C;color:#14110D;align-self:center;font-size:.95rem;padding:10px 22px}
+@media (max-width:700px){.private-card{width:min(100%,420px)}}
+@media (max-width:420px){.pc-form .row{grid-template-columns:1fr}}
 @media (max-width:820px){.pe-hero .wrap{grid-template-columns:1fr}.pe-hero figure{max-width:260px;justify-self:center;width:100%;order:-1}}
 @media (max-width:560px){header.top .wrap{flex-wrap:wrap;row-gap:6px}nav.links{width:100%;justify-content:space-between;gap:8px}}
 @media (max-width:430px){nav.links{flex-wrap:wrap;justify-content:flex-start;column-gap:16px;row-gap:4px}}
@@ -235,11 +253,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
   </div>
 
   <section id="book-private">
-    <div class="wrap pe-form">
-      <form class="panel" id="bookPrivate" novalidate>
-        <h2 class="form-title">Book a private Pizza Omakase</h2>
-        <p class="pe-price"><b>₪1,200</b> for up to 8 guests</p>
-        <p class="fine">Pick a date, then pay to confirm it.</p>
+    <div class="wrap">
+      <div class="private-card">
+        <h3>A private Pizza Omakase</h3>
+        <p class="pc-text">The full chef-guided tasting, for just you and your party.</p>
+        <p class="pc-meta"><span>Up to 8 guests</span><span class="pc-dot">·</span><span class="pc-price">₪1,200</span></p>
+        <button type="button" class="pc-btn" id="pcOpen" aria-expanded="false" aria-controls="bookPrivate">Reserve your evening</button>
+      <form id="bookPrivate" class="pc-form" novalidate hidden>
         <input type="hidden" name="_subject" value="New private evening booking">
         <input type="hidden" name="form" value="private-booking">
         <div class="row">
@@ -265,6 +285,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         <button class="btn primary" type="submit">Continue to payment · ₪1,200</button>
         <p class="status" role="status" hidden></p>
       </form>
+      </div>
     </div>
   </section>
 
@@ -344,6 +365,10 @@ const form=document.getElementById("bookPrivate"), status=form.querySelector(".s
 const sel=document.getElementById("b-date"), reqWrap=document.getElementById("b-req-wrap"), reqDate=document.getElementById("b-reqdate");
 const PAY_LABEL="Continue to payment · ₪1,200", REQ_LABEL="Send date request";
 const isRequest=()=>sel.value==="request";
+const openBtn=document.getElementById("pcOpen");
+const openForm=()=>{form.hidden=false;openBtn.setAttribute("aria-expanded","true");openBtn.hidden=true;setTimeout(()=>document.getElementById("b-name").focus(),50)};
+openBtn.addEventListener("click",openForm);
+if(location.hash==="#book-private") openForm();
 (async()=>{
   const taken=new Set();
   try{
