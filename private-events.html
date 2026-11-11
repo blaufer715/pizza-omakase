@@ -238,7 +238,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
       <form class="panel" id="private" novalidate>
         <h2 class="form-title">Book a private evening</h2>
         <p class="pe-price"><b>₪1,200</b> for up to 8 guests</p>
-        <p class="fine">Private evenings are on Tuesdays and can be booked at least 5 days ahead. Pick a date, then pay to confirm it.</p>
+        <p class="fine">Pick a date, then pay to confirm it.</p>
         <input type="hidden" name="_subject" value="New private evening booking">
         <input type="hidden" name="form" value="private-event">
         <div class="row">
@@ -247,8 +247,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
         </div>
         <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
         <div class="row">
-          <div class="field"><label for="p-date">Tuesday</label><select id="p-date" name="date" required><option value="">Loading dates…</option></select></div>
+          <div class="field"><label for="p-date">Date</label><select id="p-date" name="date" required><option value="">Loading dates…</option></select></div>
           <div class="field"><label for="p-guests">Guests</label><select id="p-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
+        </div>
+        <div class="field" id="req-wrap" hidden>
+          <label for="p-reqdate">Which date would you like?</label>
+          <input id="p-reqdate" name="requested_date" type="date">
+          <p class="fine">We'll check availability and get back to you. No payment is taken for a request.</p>
         </div>
         <div class="field"><label for="p-city">Location</label><input id="p-city" name="location" required></div>
         <div class="field">
@@ -292,7 +297,7 @@ const pDate=document.getElementById("p-date");
   const ilToday=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Jerusalem"}).format(new Date());
   const d=new Date(ilToday+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+MIN_DAYS_AHEAD);
   while(d.getUTCDay()!==2) d.setUTCDate(d.getUTCDate()+1);
-  pDate.innerHTML='<option value="">Choose a Tuesday…</option>';
+  pDate.innerHTML='<option value="">Choose a date…</option>';
   for(let shown=0,i=0;shown<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
     const iso=d.toISOString().slice(0,10);
     if(taken.has(iso)) continue;
@@ -301,7 +306,17 @@ const pDate=document.getElementById("p-date");
     o.textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
     pDate.appendChild(o);
   }
+  const req=document.createElement("option");req.value="request";req.textContent="Don't see your date? Request another…";
+  pDate.appendChild(req);
 })();
+const reqWrap=document.getElementById("req-wrap"), reqDate=document.getElementById("p-reqdate");
+const PAY_LABEL="Continue to payment · ₪1,200", REQ_LABEL="Send date request";
+{const t=new Date();t.setDate(t.getDate()+1);reqDate.min=t.toISOString().slice(0,10)}
+const isRequest=()=>pDate.value==="request";
+pDate.addEventListener("change",()=>{
+  reqWrap.hidden=!isRequest(); reqDate.required=isRequest();
+  btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL;
+});
 form.addEventListener("submit",async ev=>{
   ev.preventDefault();
   const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
@@ -314,17 +329,20 @@ form.addEventListener("submit",async ev=>{
   try{
     const data=new FormData(form);
     data.append("access_key",WEB3FORMS_KEY);
-    data.append("subject","Pizza Omakase · PRIVATE EVENING booking · "+data.get("date"));
+    const request=isRequest();
+    if(request) data.set("date","REQUEST: "+data.get("requested_date"));
+    data.append("subject",request?"Pizza Omakase · private evening DATE REQUEST · "+data.get("requested_date"):"Pizza Omakase · PRIVATE EVENING booking · "+data.get("date"));
     data.append("from_name","Pizza Omakase website");
     const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
     if(!res.ok) throw new Error(res.status);
     form.reset();
+    if(request){location.href="request-received.html";return;}
     status.hidden=false;status.className="status ok";status.textContent="Thanks! Taking you to payment…";
     location.href=PRIVATE_PAY_LINK;
   }catch(e){
     status.hidden=false;status.className="status err";
     status.textContent="Didn't go through. Please try again.";
-    btn.disabled=false;btn.textContent="Continue to payment · ₪1,200";
+    btn.disabled=false;btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL;
   }
 });
 </script>
