@@ -70,6 +70,7 @@ a{color:inherit}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
 .mark{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:baseline;gap:8px}
+.mark img{display:block;width:36px;height:36px;transition:transform .3s}.mark:hover img{transform:rotate(-20deg)}
 .mark small{font-family:var(--mono);font-weight:400;font-size:.68rem;color:var(--muted);letter-spacing:.08em}
 nav.links{display:flex;gap:20px;font-family:var(--display);font-weight:500;font-size:.95rem}
 nav.links a{text-decoration:none;color:var(--muted)}
@@ -211,7 +212,7 @@ footer .wrap a:hover{color:var(--ink)}
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="#top">Pizza Omakase</a>
+    <a class="mark" href="#top" aria-label="Pizza Omakase home"><img src="favicon.svg" alt="Pizza Omakase" width="36" height="36"></a>
     <nav class="links" aria-label="Sections">
       <a href="#dates">Pizza Omakase</a>
       <a href="private-events.html">Private events</a>
