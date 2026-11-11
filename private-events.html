@@ -276,9 +276,9 @@ const form=document.getElementById("private");
 const status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
 const PRIVATE_PAY_LINK = "https://mrng.to/uQAEgTNSwF"; // Morning: ₪1,200 private evening
 const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJIR6Vepet6Y2UDRExhSLIXeEjG2Xf9GtXmF34XiUtwmNr2so5jNAj9eTIJwAHDrVMnOuB5fs/pub?gid=0&single=true&output=csv";
-const MIN_DAYS_AHEAD = 5, WEEKS_SHOWN = 12;
+const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3;
 const pDate=document.getElementById("p-date");
-/* Tuesdays at least 5 days from today (Israel time), minus any date the sheet marks as taken
+/* The next 3 open Tuesdays at least 5 days from today (Israel time), skipping any date the sheet marks as taken
    (a row with status "private", or any evening already scheduled that day). */
 (async()=>{
   const taken=new Set();
@@ -293,9 +293,10 @@ const pDate=document.getElementById("p-date");
   const d=new Date(ilToday+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+MIN_DAYS_AHEAD);
   while(d.getUTCDay()!==2) d.setUTCDate(d.getUTCDate()+1);
   pDate.innerHTML='<option value="">Choose a Tuesday…</option>';
-  for(let i=0;i<WEEKS_SHOWN;i++,d.setUTCDate(d.getUTCDate()+7)){
+  for(let shown=0,i=0;shown<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
     const iso=d.toISOString().slice(0,10);
     if(taken.has(iso)) continue;
+    shown++;
     const o=document.createElement("option");o.value=iso;
     o.textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
     pDate.appendChild(o);
