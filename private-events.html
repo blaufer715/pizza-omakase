@@ -216,6 +216,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 .pc-form input,.pc-form select,.pc-form textarea{background:#1D1913;color:#F1E9DA;border-color:#4A3D28;font-size:.95rem;padding:9px 10px}
 .pc-form input:focus,.pc-form select:focus,.pc-form textarea:focus{outline:2px solid #C9A45C;outline-offset:1px}
 .pc-form textarea{min-height:70px}
+.pc-cal{border:1px solid #4A3D28;border-radius:4px;padding:10px 10px 12px;background:#1A160F}
+.pc-cal-head{display:flex;align-items:center;justify-content:space-between;font-family:var(--display);font-weight:600;color:#F1E9DA;margin-bottom:8px}
+.pc-nav{background:none;border:1px solid #4A3D28;color:#C9A45C;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1.1rem;line-height:1}
+.pc-nav:disabled{opacity:.25;cursor:default}
+.pc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.pc-wd{font-family:var(--mono);font-size:.68rem;color:#8C806B;padding-bottom:2px}
+.pc-day{display:flex;align-items:center;justify-content:center;aspect-ratio:1;font-size:.85rem;color:#5E5444;border-radius:50%}
+button.pc-day{border:1px solid #C9A45C;background:transparent;color:#F1E9DA;font-weight:600;cursor:pointer;font-family:inherit}
+button.pc-day:hover{background:rgba(201,164,92,.18)}
+button.pc-day.on{background:#C9A45C;color:#14110D}
+.pc-picked{min-height:1em;color:#C9A45C!important}
+.pc-link{align-self:flex-start;background:none;border:none;padding:0;color:#C9A45C;text-decoration:underline;text-underline-offset:3px;font:inherit;font-size:.85rem;cursor:pointer}
 .pc-form .row{gap:10px}
 .pc-form .btn.primary{background:#C9A45C;border-color:#C9A45C;color:#14110D;align-self:center;font-size:.95rem;padding:10px 22px}
 @media (max-width:700px){.private-card{width:min(100%,420px)}}
@@ -267,9 +279,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
           <div class="field"><label for="b-phone">Phone</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
         </div>
         <div class="field"><label for="b-email">Email</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
-        <div class="row">
-          <div class="field"><label for="b-date">Date</label><select id="b-date" name="date" required><option value="">Loading dates…</option></select></div>
-          <div class="field"><label for="b-guests">Guests</label><select id="b-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
+        <div class="field"><label for="b-guests">Guests</label><select id="b-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
+        <div class="field">
+          <label for="b-date">Date</label>
+          <input type="hidden" id="b-date" name="date" required>
+          <div class="pc-cal" id="bCal" aria-live="polite"><p class="fine">Loading dates…</p></div>
+          <p class="pc-picked fine" id="bPicked"></p>
+          <button type="button" class="pc-link" id="bReq">Don't see your date? Request another</button>
         </div>
         <div class="field" id="b-req-wrap" hidden>
           <label for="b-reqdate">Which date would you like?</label>
@@ -380,19 +396,48 @@ if(location.hash==="#book-private") openForm();
   const ilToday=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Jerusalem"}).format(new Date());
   const d=new Date(ilToday+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+MIN_DAYS_AHEAD);
   while(d.getUTCDay()!==2) d.setUTCDate(d.getUTCDate()+1);
-  sel.innerHTML='<option value="">Choose a date…</option>';
-  for(let shown=0,i=0;shown<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
+  const avail=[];
+  for(let i=0;avail.length<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
     const iso=d.toISOString().slice(0,10);
-    if(taken.has(iso)) continue;
-    shown++;
-    const o=document.createElement("option");o.value=iso;
-    o.textContent=d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
-    sel.appendChild(o);
+    if(!taken.has(iso)) avail.push(iso);
   }
-  const o=document.createElement("option");o.value="request";o.textContent="Don't see your date? Request another…";sel.appendChild(o);
+  renderCal(avail);
 })();
+/* Month calendar: only the available dates can be clicked. */
+const cal=document.getElementById("bCal"), picked=document.getElementById("bPicked");
+const fmtLong=iso=>new Date(iso+"T12:00:00Z").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+let months=[], mi=0, availSet=new Set();
+function renderCal(avail){
+  availSet=new Set(avail);
+  months=[...new Set(avail.map(a=>a.slice(0,7)))];
+  if(!months.length){cal.innerHTML='<p class="fine">No open dates right now. Please request a date below.</p>';return}
+  mi=0; drawMonth();
+}
+function drawMonth(){
+  const ym=months[mi], [y,m]=ym.split("-").map(Number);
+  const first=new Date(Date.UTC(y,m-1,1)), days=new Date(Date.UTC(y,m,0)).getUTCDate();
+  const title=first.toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"});
+  let h=`<div class="pc-cal-head"><button type="button" class="pc-nav" data-d="-1" ${mi===0?"disabled":""} aria-label="Previous month">‹</button><span>${title}</span><button type="button" class="pc-nav" data-d="1" ${mi===months.length-1?"disabled":""} aria-label="Next month">›</button></div><div class="pc-grid">`;
+  ["S","M","T","W","T","F","S"].forEach(w=>h+=`<span class="pc-wd">${w}</span>`);
+  for(let i=0;i<first.getUTCDay();i++) h+='<span></span>';
+  for(let dd=1;dd<=days;dd++){
+    const iso=`${ym}-${String(dd).padStart(2,"0")}`;
+    h+=availSet.has(iso)?`<button type="button" class="pc-day open${sel.value===iso?" on":""}" data-iso="${iso}" aria-label="${fmtLong(iso)}" aria-pressed="${sel.value===iso}">${dd}</button>`:`<span class="pc-day">${dd}</span>`;
+  }
+  cal.innerHTML=h+'</div>';
+}
+cal.addEventListener("click",e=>{
+  const nav=e.target.closest(".pc-nav"); if(nav){mi+=+nav.dataset.d;drawMonth();return}
+  const day=e.target.closest(".pc-day.open"); if(day) choose(day.dataset.iso);
+});
+document.getElementById("bReq").addEventListener("click",()=>choose("request"));
+function choose(v){
+  sel.value=v;
+  picked.textContent=v==="request"?"":v?"Selected: "+fmtLong(v):"";
+  reqWrap.hidden=!isRequest(); reqDate.required=isRequest(); btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL;
+  if(months.length) drawMonth();
+}
 {const t=new Date();t.setDate(t.getDate()+1);reqDate.min=t.toISOString().slice(0,10)}
-sel.addEventListener("change",()=>{reqWrap.hidden=!isRequest();reqDate.required=isRequest();btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL});
 form.addEventListener("submit",async ev=>{
   ev.preventDefault();
   const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
@@ -411,7 +456,7 @@ form.addEventListener("submit",async ev=>{
     data.append("from_name","Pizza Omakase website");
     const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
     if(!res.ok) throw new Error(res.status);
-    form.reset();
+    form.reset(); choose("");
     if(request){location.href="request-received.html";return;}
     status.hidden=false;status.className="status ok";status.textContent="Thanks! Taking you to payment…";
     location.href=PRIVATE_PAY_LINK;
