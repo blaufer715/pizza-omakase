@@ -33,6 +33,7 @@
     "Send": "שליחה",
     // private evening booking
     "Continue to payment · ₪1,200": "המשך לתשלום · ₪1,200",
+    "Book Now": "הזמינו עכשיו",
     "Send date request": "שליחת בקשה לתאריך",
     "Selected: {d}": "התאריך שנבחר: {d}",
     "Previous month": "החודש הקודם",
@@ -87,10 +88,11 @@
   function addToggle(){
     var nav = document.querySelector("nav.links");
     if (!nav || document.getElementById("langToggle")) return;
+    // Sits after the menu, on its own at the far end of the header (see i18n.css).
     var b = document.createElement("button");
     b.type = "button"; b.id = "langToggle"; b.className = "lang-toggle";
     b.addEventListener("click", function(){ I18N.set(lang === "he" ? "en" : "he"); });
-    nav.appendChild(b);
+    nav.parentNode.insertBefore(b, nav.nextSibling);
   }
 
   window.I18N = {

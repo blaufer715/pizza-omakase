@@ -22,3 +22,18 @@ html[dir="rtl"] .soon{right:auto;left:-16px;transform:rotate(-8deg)}
 html[dir="rtl"] .pc-nav{transform:scaleX(-1)}
 /* Hidden spam-trap fields sit far off to the left; in right-to-left pages that would create a huge sideways scroll. */
 html[dir="rtl"] .hp{left:auto;right:-9999px}
+/* Header: logo and menu tabs together at the start, language switch alone at the far end.
+   On phones the switch moves up into the logo row (top corner) and the tabs wrap below. */
+header.top .wrap{justify-content:flex-start}
+header.top nav.links{margin-inline-start:clamp(16px,3vw,36px)}
+header.top .lang-toggle{margin-inline-start:auto;flex:none}
+@media (max-width:560px){
+  header.top nav.links{order:3;margin-inline-start:0}
+  header.top .lang-toggle{order:2}
+}
+/* Phones: the switch always sits in the top-right corner, in both languages
+   (in Hebrew the logo moves to the left of that row; the tabs below stay right-to-left). */
+@media (max-width:560px){
+  html[dir="rtl"] header.top .wrap{direction:ltr}
+  html[dir="rtl"] header.top nav.links{direction:rtl}
+}

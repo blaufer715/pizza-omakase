@@ -271,7 +271,7 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
     <div class="wrap">
       <div class="private-card">
         <h3 data-he="פיצה אומקאסה פרטית">A private Pizza Omakase</h3>
-        <p class="pc-text" data-he="כל חוויית הטעימות בהובלת השף – רק בשבילכם ובשביל החבורה שלכם.">The full chef-guided tasting, for just you and your party.</p>
+        <p class="pc-text" data-he="כל חוויית הטעימות בהובלת השף – רק בשבילכם.">The full chef-guided tasting, for just you and your party.</p>
         <p class="pc-meta"><span data-he="עד 8 אורחים">Up to 8 guests</span><span class="pc-dot">·</span><span class="pc-price">₪1,200</span></p>
         <button type="button" class="pc-btn" id="pcOpen" aria-expanded="false" aria-controls="bookPrivate" data-he="שריינו את הערב שלכם">Reserve your evening</button>
       <form id="bookPrivate" class="pc-form" novalidate hidden>
@@ -301,7 +301,7 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
         </div>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
         <p class="fine" data-he="ביטול עד 48 שעות לפני הערב – החזר מלא; ביטול מאוחר יותר – ללא החזר.">Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p>
-        <button class="btn primary" type="submit" data-he="המשך לתשלום · ₪1,200">Continue to payment · ₪1,200</button>
+        <button class="btn primary" type="submit" data-he="הזמינו עכשיו">Book Now</button>
         <p class="status" role="status" hidden></p>
       </form>
       </div>
@@ -383,7 +383,7 @@ const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJ
 const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3, KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
 const form=document.getElementById("bookPrivate"), status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
 const sel=document.getElementById("b-date"), reqWrap=document.getElementById("b-req-wrap"), reqDate=document.getElementById("b-reqdate");
-const payLabel=()=>I18N.t("Continue to payment · ₪1,200"), reqLabel=()=>I18N.t("Send date request");
+const payLabel=()=>I18N.t("Book Now"), reqLabel=()=>I18N.t("Send date request");
 const isRequest=()=>sel.value==="request";
 const openBtn=document.getElementById("pcOpen");
 const openForm=()=>{form.hidden=false;openBtn.setAttribute("aria-expanded","true");openBtn.hidden=true;setTimeout(()=>document.getElementById("b-name").focus(),50)};
