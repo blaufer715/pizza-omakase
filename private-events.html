@@ -141,6 +141,11 @@ section.alt{background:var(--soft)}
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .gallery img{min-width:0}
 .form-title{font-size:2rem}
+.price-table{width:100%;border-collapse:collapse;margin-top:18px;font-size:1.05rem}
+.price-table th{font-family:var(--display);font-weight:600;font-size:.85rem;color:var(--muted);text-align:start;padding:0 4px 10px;border-bottom:2px solid var(--ink)}
+.price-table td{padding:14px 4px;border-bottom:1px solid var(--line)}
+.price-table td:last-child,.price-table th:last-child{text-align:end;font-family:var(--display);font-weight:700}
+.price-table td:last-child{font-size:1.25rem;color:var(--tomato)}
 .form-lede{color:var(--muted);font-size:1.05rem;line-height:1.5;margin:-4px 0 6px}
 .gallery figure{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
 .gallery img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius);display:block}
@@ -333,6 +338,20 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
         <button class="btn primary" type="submit" data-he="שליחת בקשה">Send request</button>
         <p class="status" role="status" hidden></p>
       </form>
+    </div>
+  </section>
+  <section id="catering">
+    <div class="wrap pe-form">
+      <h2 class="form-title" data-he="מחירון קייטרינג">Catering pricing</h2>
+      <table class="price-table">
+        <thead><tr><th scope="col" data-he="מספר אורחים">Guests</th><th scope="col" data-he="מחיר לאורח">Price per guest</th></tr></thead>
+        <tbody>
+          <tr><td data-he="25–49 אורחים">25–49 guests</td><td>₪100</td></tr>
+          <tr><td data-he="50–99 אורחים">50–99 guests</td><td>₪90</td></tr>
+          <tr><td data-he="100–149 אורחים">100–149 guests</td><td>₪80</td></tr>
+          <tr><td data-he="150 אורחים ומעלה">150+ guests</td><td>₪75</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 </main>
