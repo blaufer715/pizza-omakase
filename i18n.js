@@ -7,26 +7,18 @@
 (function(){
   var KEY = "po-lang";
   var HE = {
-    // home: evenings list and seat form
+    // home: evenings list
     "No evenings scheduled yet.": "עדיין אין ערבים מתוכננים.",
-    "Full · waitlist": "מלא · רשימת המתנה",
+    "Full": "מלא",
     "1 seat left": "נותר מקום אחד",
     "{n} seats left": "נותרו {n} מקומות",
     "{n} seats open": "{n} מקומות פנויים",
     "Seats open": "יש מקומות פנויים",
     "Reserve & pay": "הזמנה ותשלום",
-    "Join waitlist": "לרשימת ההמתנה",
-    "Reserve": "להזמנה",
-    " — full, join waitlist": " — מלא, הצטרפו לרשימת ההמתנה",
     "per seat": "לאורח",
-    "Continue to payment": "המשך לתשלום",
     "Send request": "שליחת בקשה",
-    "Got it. I'll be in touch to confirm.": "קיבלנו! ניצור איתכם קשר כדי לאשר.",
-    "Total: ₪{t} · 1 seat × ₪{p}": "סה״כ: ₪{t} · אורח אחד × ₪{p}",
-    "Total: ₪{t} · {n} seats × ₪{p}": "סה״כ: ₪{t} · {n} אורחים × ₪{p}",
     // shared form messages
     "Please fill in \"{x}\" before sending.": "נא למלא \"{x}\" לפני השליחה.",
-    "Not connected yet, so nothing was sent.": "הטופס עדיין לא מחובר, לכן לא נשלח דבר.",
     "Sending…": "שולחים…",
     "Thanks! Taking you to payment…": "תודה! מעבירים אתכם לתשלום…",
     "Didn't go through. Please try again.": "השליחה לא הצליחה. נסו שוב.",
