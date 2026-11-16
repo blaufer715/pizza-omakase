@@ -4,12 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Thank you · Pizza Omakase</title>
+<title data-he="תודה · פיצה אומקאסה">Thank you · Pizza Omakase</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#B5321F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="i18n.css">
+<script src="i18n.js"></script>
 <style>
 /* Layout: one long counter-service scroll — hero → the tasting card → the pies → dates → book → private events.
    Palette: basil-ink on a cool flour-dusted marble, crust gold for warmth, tomato reserved for actions. */
@@ -204,13 +207,13 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="./" aria-label="Pizza Omakase home"><img src="favicon.svg" alt="Pizza Omakase" width="36" height="36"></a>
-    <nav class="links" aria-label="Main">
-      <a href="./#dates">Pizza Omakase</a>
-      <a href="private-events.html">Private events</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="./#about">About</a>
-      <a href="reviews.html">Reviews</a>
+    <a class="mark" href="./" aria-label="Pizza Omakase home" data-he-aria-label="פיצה אומקאסה – דף הבית"><img src="favicon.svg" alt="Pizza Omakase" data-he-alt="פיצה אומקאסה" width="36" height="36"></a>
+    <nav class="links" aria-label="Main" data-he-aria-label="ראשי">
+      <a href="./#dates" data-he="פיצה אומקאסה">Pizza Omakase</a>
+      <a href="private-events.html" data-he="אירועים פרטיים">Private events</a>
+      <a href="workshops.html" data-he="סדנאות">Workshops</a>
+      <a href="./#about" data-he="אודות">About</a>
+      <a href="reviews.html" data-he="המלצות">Reviews</a>
     </nav>
   </div>
 </header>
@@ -219,18 +222,18 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
   <div class="thanks">
     <div class="wrap">
       <div class="copy">
-        <p class="eyebrow">Payment received</p>
-        <h1>Thank you.<br><em>Your seat is booked.</em></h1>
-        <p class="lede">We can't wait to cook for you.</p>
+        <p class="eyebrow" data-he="התשלום התקבל">Payment received</p>
+        <h1 data-he="תודה.<br><em>המקום שלכם שמור.</em>">Thank you.<br><em>Your seat is booked.</em></h1>
+        <p class="lede" data-he="אנחנו כבר מחכים לבשל בשבילכם.">We can't wait to cook for you.</p>
         <ul class="next">
-          <li><span class="n">1</span><p>Your receipt is on its way to your email.</p></li>
-          <li><span class="n">2</span><p>We'll send you the exact location before the evening.</p></li>
-          <li><span class="n">3</span><p>Any allergies? Let us know below so the chef can plan around them.</p></li>
+          <li><span class="n">1</span><p data-he="הקבלה בדרך למייל שלכם.">Your receipt is on its way to your email.</p></li>
+          <li><span class="n">2</span><p data-he="נשלח לכם את המיקום המדויק לפני הערב.">We'll send you the exact location before the evening.</p></li>
+          <li><span class="n">3</span><p data-he="יש אלרגיות? ספרו לנו כאן למטה, והשף ייקח אותן בחשבון.">Any allergies? Let us know below so the chef can plan around them.</p></li>
         </ul>
-        <div class="ctas"><a class="btn" href="./">Back to Pizza Omakase</a></div>
+        <div class="ctas"><a class="btn" href="./" data-he="חזרה לפיצה אומקאסה">Back to Pizza Omakase</a></div>
       </div>
       <figure>
-        <img src="images/pizza-classic.webp?v=4" alt="The Classic pie" width="900" height="900">
+        <img src="images/pizza-classic.webp?v=4" alt="The Classic pie" data-he-alt="הפיצה הקלאסית" width="900" height="900">
       </figure>
     </div>
   </div>
@@ -239,16 +242,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
     <div class="wrap">
       <div class="note">
         <form class="panel" id="noteForm" novalidate>
-          <h2 class="form-title">Anything we should know?</h2>
+          <h2 class="form-title" data-he="יש משהו שכדאי שנדע?">Anything we should know?</h2>
           <div class="row">
-            <div class="field"><label for="n-name">Name on the booking</label><input id="n-name" name="name" autocomplete="name" required></div>
-            <div class="field"><label for="n-phone">Phone</label><input id="n-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
+            <div class="field"><label for="n-name" data-he="שם המזמין">Name on the booking</label><input id="n-name" name="name" autocomplete="name" required></div>
+            <div class="field"><label for="n-phone" data-he="טלפון">Phone</label><input id="n-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
           </div>
           <div class="field">
-            <label for="n-note">Allergies or notes</label>
+            <label for="n-note" data-he="אלרגיות או הערות">Allergies or notes</label>
             <textarea id="n-note" name="allergies_or_notes" required></textarea>
           </div>
-          <button class="btn primary" type="submit">Send</button>
+          <button class="btn primary" type="submit" data-he="שליחה">Send</button>
           <p class="status" role="status" hidden></p>
         </form>
       </div>
@@ -271,10 +274,10 @@ form.addEventListener("submit",async ev=>{
   const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim());
   if(missing){
     status.hidden=false;status.className="status err";
-    status.textContent=`Please fill in "${form.querySelector(`label[for="${missing.id}"]`).textContent}" before sending.`;
+    status.textContent=I18N.t("Please fill in \"{x}\" before sending.",{x:form.querySelector(`label[for="${missing.id}"]`).textContent});
     missing.focus();return;
   }
-  btn.disabled=true;btn.textContent="Sending…";
+  btn.disabled=true;btn.textContent=I18N.t("Sending…");
   try{
     const data=new FormData(form);
     data.append("access_key",WEB3FORMS_KEY);
@@ -283,17 +286,19 @@ form.addEventListener("submit",async ev=>{
     const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
     if(!res.ok) throw new Error(res.status);
     form.reset();
-    status.hidden=false;status.className="status ok";status.textContent="Thanks, the chef has your note.";
+    status.hidden=false;status.className="status ok";status.textContent=I18N.t("Thanks, the chef has your note.");
   }catch(e){
-    status.hidden=false;status.className="status err";status.textContent="Didn't go through. Please try again.";
+    status.hidden=false;status.className="status err";status.textContent=I18N.t("Didn't go through. Please try again.");
   }finally{
-    btn.disabled=false;btn.textContent="Send";
+    btn.disabled=false;btn.textContent=I18N.t("Send");
   }
 });
 </script>
 <script>
+/* After a private-evening payment the headline says so, in either language. */
 if(new URLSearchParams(location.search).has("private")){
-  const h=document.querySelector("h1 em"); if(h) h.textContent="Your private evening is booked.";
+  const h1=document.querySelector("h1[data-he]");
+  if(h1){h1.dataset.en="Thank you.<br><em>Your private evening is booked.</em>";h1.dataset.he="תודה.<br><em>הערב הפרטי שלכם שמור.</em>";h1.innerHTML=I18N.lang==="he"?h1.dataset.he:h1.dataset.en}
 }
 </script>
 </body>

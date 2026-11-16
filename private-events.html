@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="Private events · Pizza Omakase">
 <meta property="og:image" content="https://pizzaomakase.co.il/images/originals/round-margherita-leopard.jpg">
-<title>Private events · Pizza Omakase</title>
-<meta name="description" content="Book a private Pizza Omakase evening for your group: a chef-guided pizza tasting, customized for your event.">
+<title data-he="אירועים פרטיים · פיצה אומקאסה">Private events · Pizza Omakase</title>
+<meta name="description" content="Book a private Pizza Omakase evening for your group: a chef-guided pizza tasting, customized for your event." data-he-content="הזמינו ערב פיצה אומקאסה פרטי לקבוצה שלכם: טעימות פיצה בהובלת השף, בהתאמה אישית לאירוע.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pizza Omakase">
-<meta property="og:description" content="Book a private Pizza Omakase evening for your group: a chef-guided pizza tasting, customized for your event.">
+<meta property="og:description" content="Book a private Pizza Omakase evening for your group: a chef-guided pizza tasting, customized for your event." data-he-content="הזמינו ערב פיצה אומקאסה פרטי לקבוצה שלכם: טעימות פיצה בהובלת השף, בהתאמה אישית לאירוע.">
 <meta property="og:url" content="https://pizzaomakase.co.il/private-events.html">
 <meta property="og:locale" content="en_IL">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,6 +18,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="i18n.css">
+<script src="i18n.js"></script>
 <style>
 /* Layout: one long counter-service scroll — hero → the tasting card → the pies → dates → book → private events.
    Palette: basil-ink on a cool flour-dusted marble, crust gold for warmth, tomato reserved for actions. */
@@ -240,13 +243,13 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="./" aria-label="Pizza Omakase home"><img src="favicon.svg" alt="Pizza Omakase" width="36" height="36"></a>
-    <nav class="links" aria-label="Main">
-      <a href="./#dates">Pizza Omakase</a>
-      <a href="private-events.html" aria-current="page">Private events</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="./#about">About</a>
-      <a href="reviews.html">Reviews</a>
+    <a class="mark" href="./" aria-label="Pizza Omakase home" data-he-aria-label="פיצה אומקאסה – דף הבית"><img src="favicon.svg" alt="Pizza Omakase" data-he-alt="פיצה אומקאסה" width="36" height="36"></a>
+    <nav class="links" aria-label="Main" data-he-aria-label="ראשי">
+      <a href="./#dates" data-he="פיצה אומקאסה">Pizza Omakase</a>
+      <a href="private-events.html" aria-current="page" data-he="אירועים פרטיים">Private events</a>
+      <a href="workshops.html" data-he="סדנאות">Workshops</a>
+      <a href="./#about" data-he="אודות">About</a>
+      <a href="reviews.html" data-he="המלצות">Reviews</a>
     </nav>
   </div>
 </header>
@@ -255,11 +258,11 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
   <div class="pe-hero">
     <div class="wrap">
       <div class="copy">
-        <p class="eyebrow">Private events</p>
-        <h1>Pizza Omakase<br><em>for your group.</em></h1>
+        <p class="eyebrow" data-he="אירועים פרטיים">Private events</p>
+        <h1 data-he="פיצה אומקאסה<br><em>לקבוצה שלכם.</em>">Pizza Omakase<br><em>for your group.</em></h1>
       </div>
       <figure>
-        <img src="images/pizza-vodka.webp?v=4" alt="The Vodka pie" width="900" height="900">
+        <img src="images/pizza-vodka.webp?v=4" alt="The Vodka pie" data-he-alt="פיצה וודקה" width="900" height="900">
       </figure>
     </div>
   </div>
@@ -267,38 +270,38 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
   <section id="book-private">
     <div class="wrap">
       <div class="private-card">
-        <h3>A private Pizza Omakase</h3>
-        <p class="pc-text">The full chef-guided tasting, for just you and your party.</p>
-        <p class="pc-meta"><span>Up to 8 guests</span><span class="pc-dot">·</span><span class="pc-price">₪1,200</span></p>
-        <button type="button" class="pc-btn" id="pcOpen" aria-expanded="false" aria-controls="bookPrivate">Reserve your evening</button>
+        <h3 data-he="פיצה אומקאסה פרטית">A private Pizza Omakase</h3>
+        <p class="pc-text" data-he="כל חוויית הטעימות בהובלת השף – רק בשבילכם ובשביל החבורה שלכם.">The full chef-guided tasting, for just you and your party.</p>
+        <p class="pc-meta"><span data-he="עד 8 אורחים">Up to 8 guests</span><span class="pc-dot">·</span><span class="pc-price">₪1,200</span></p>
+        <button type="button" class="pc-btn" id="pcOpen" aria-expanded="false" aria-controls="bookPrivate" data-he="שריינו את הערב שלכם">Reserve your evening</button>
       <form id="bookPrivate" class="pc-form" novalidate hidden>
         <input type="hidden" name="_subject" value="New private evening booking">
         <input type="hidden" name="form" value="private-booking">
         <div class="row">
-          <div class="field"><label for="b-name">Name</label><input id="b-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="b-phone">Phone</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
+          <div class="field"><label for="b-name" data-he="שם">Name</label><input id="b-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="b-phone" data-he="טלפון">Phone</label><input id="b-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
         </div>
-        <div class="field"><label for="b-email">Email</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
-        <div class="field"><label for="b-guests">Guests</label><select id="b-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
+        <div class="field"><label for="b-email" data-he="אימייל">Email</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="b-guests" data-he="מספר אורחים">Guests</label><select id="b-guests" name="guests" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></div>
         <div class="field">
-          <label for="b-date">Date</label>
+          <label for="b-date" data-he="תאריך">Date</label>
           <input type="hidden" id="b-date" name="date" required>
-          <div class="pc-cal" id="bCal" aria-live="polite"><p class="fine">Loading dates…</p></div>
+          <div class="pc-cal" id="bCal" aria-live="polite"><p class="fine" data-he="טוען תאריכים…">Loading dates…</p></div>
           <p class="pc-picked fine" id="bPicked"></p>
-          <button type="button" class="pc-link" id="bReq">Don't see your date? Request another</button>
+          <button type="button" class="pc-link" id="bReq" data-he="לא מצאתם תאריך מתאים? בקשו תאריך אחר">Don't see your date? Request another</button>
         </div>
         <div class="field" id="b-req-wrap" hidden>
-          <label for="b-reqdate">Which date would you like?</label>
+          <label for="b-reqdate" data-he="באיזה תאריך תרצו?">Which date would you like?</label>
           <input id="b-reqdate" name="requested_date" type="date">
-          <p class="fine">We'll check availability and get back to you. No payment is taken for a request.</p>
+          <p class="fine" data-he="נבדוק זמינות ונחזור אליכם. שליחת בקשה לא כרוכה בתשלום.">We'll check availability and get back to you. No payment is taken for a request.</p>
         </div>
         <div class="field">
-          <label for="b-msg">Allergies or notes <span class="opt">(optional)</span></label>
+          <label for="b-msg" data-he="אלרגיות או הערות <span class=&quot;opt&quot;>(לא חובה)</span>">Allergies or notes <span class="opt">(optional)</span></label>
           <textarea id="b-msg" name="message"></textarea>
         </div>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="fine">Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p>
-        <button class="btn primary" type="submit">Continue to payment · ₪1,200</button>
+        <p class="fine" data-he="ביטול עד 48 שעות לפני הערב – החזר מלא; ביטול מאוחר יותר – ללא החזר.">Full refund if you cancel more than 48 hours before the evening; no refunds within 48 hours.</p>
+        <button class="btn primary" type="submit" data-he="המשך לתשלום · ₪1,200">Continue to payment · ₪1,200</button>
         <p class="status" role="status" hidden></p>
       </form>
       </div>
@@ -308,26 +311,26 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
   <section class="alt">
     <div class="wrap pe-form">
       <form class="panel" id="private" novalidate>
-        <h2 class="form-title">Book your custom private event</h2>
-        <p class="form-lede">A private, chef-guided pizza evening built around your event. Every menu is customized for you, so tell us about the occasion and we'll design it together.</p>
+        <h2 class="form-title" data-he="הזמינו אירוע פרטי בהתאמה אישית">Book your custom private event</h2>
+        <p class="form-lede" data-he="ערב פיצה פרטי בהובלת השף, שנבנה סביב האירוע שלכם. כל תפריט מותאם במיוחד בשבילכם – ספרו לנו על האירוע ונתכנן אותו יחד.">A private, chef-guided pizza evening built around your event. Every menu is customized for you, so tell us about the occasion and we'll design it together.</p>
         <input type="hidden" name="_subject" value="New private event request">
         <input type="hidden" name="form" value="private-event">
         <div class="row">
-          <div class="field"><label for="p-name">Name</label><input id="p-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="p-phone">Phone</label><input id="p-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
+          <div class="field"><label for="p-name" data-he="שם">Name</label><input id="p-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="p-phone" data-he="טלפון">Phone</label><input id="p-phone" name="phone" type="tel" autocomplete="tel" placeholder="+972" required></div>
         </div>
-        <div class="field"><label for="p-email">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="p-email" data-he="אימייל">Email</label><input id="p-email" name="email" type="email" autocomplete="email" required></div>
         <div class="row">
-          <div class="field"><label for="p-date">Date</label><input id="p-date" name="date" type="date" required></div>
-          <div class="field"><label for="p-guests">Guests</label><input id="p-guests" name="guests" type="number" min="2" max="80" inputmode="numeric" required></div>
+          <div class="field"><label for="p-date" data-he="תאריך">Date</label><input id="p-date" name="date" type="date" required></div>
+          <div class="field"><label for="p-guests" data-he="מספר אורחים">Guests</label><input id="p-guests" name="guests" type="number" min="2" max="80" inputmode="numeric" required></div>
         </div>
-        <div class="field"><label for="p-city">Location</label><input id="p-city" name="location" required></div>
+        <div class="field"><label for="p-city" data-he="מיקום">Location</label><input id="p-city" name="location" required></div>
         <div class="field">
-          <label for="p-msg">Tell us about your event <span class="opt">(optional)</span></label>
+          <label for="p-msg" data-he="ספרו לנו על האירוע <span class=&quot;opt&quot;>(לא חובה)</span>">Tell us about your event <span class="opt">(optional)</span></label>
           <textarea id="p-msg" name="message"></textarea>
         </div>
         <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn primary" type="submit">Send request</button>
+        <button class="btn primary" type="submit" data-he="שליחת בקשה">Send request</button>
         <p class="status" role="status" hidden></p>
       </form>
     </div>
@@ -351,10 +354,10 @@ form.addEventListener("submit",async ev=>{
   const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
   if(missing){
     status.hidden=false;status.className="status err";
-    status.textContent=`Please fill in "${form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()}" before sending.`;
+    status.textContent=I18N.t("Please fill in \"{x}\" before sending.",{x:form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()});
     missing.focus();return;
   }
-  btn.disabled=true;btn.textContent="Sending…";
+  btn.disabled=true;btn.textContent=I18N.t("Sending…");
   try{
     const data=new FormData(form);
     data.append("access_key",WEB3FORMS_KEY);
@@ -366,8 +369,8 @@ form.addEventListener("submit",async ev=>{
     location.href="request-received.html";
   }catch(e){
     status.hidden=false;status.className="status err";
-    status.textContent="Didn't go through. Please try again.";
-    btn.disabled=false;btn.textContent="Send request";
+    status.textContent=I18N.t("Didn't go through. Please try again.");
+    btn.disabled=false;btn.textContent=I18N.t("Send request");
   }
 });
 </script>
@@ -380,7 +383,7 @@ const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJ
 const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3, KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
 const form=document.getElementById("bookPrivate"), status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
 const sel=document.getElementById("b-date"), reqWrap=document.getElementById("b-req-wrap"), reqDate=document.getElementById("b-reqdate");
-const PAY_LABEL="Continue to payment · ₪1,200", REQ_LABEL="Send date request";
+const payLabel=()=>I18N.t("Continue to payment · ₪1,200"), reqLabel=()=>I18N.t("Send date request");
 const isRequest=()=>sel.value==="request";
 const openBtn=document.getElementById("pcOpen");
 const openForm=()=>{form.hidden=false;openBtn.setAttribute("aria-expanded","true");openBtn.hidden=true;setTimeout(()=>document.getElementById("b-name").focus(),50)};
@@ -405,20 +408,20 @@ if(location.hash==="#book-private") openForm();
 })();
 /* Month calendar: only the available dates can be clicked. */
 const cal=document.getElementById("bCal"), picked=document.getElementById("bPicked");
-const fmtLong=iso=>new Date(iso+"T12:00:00Z").toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+const fmtLong=iso=>new Date(iso+"T12:00:00Z").toLocaleDateString(I18N.locale(),{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
 let months=[], mi=0, availSet=new Set();
 function renderCal(avail){
   availSet=new Set(avail);
   months=[...new Set(avail.map(a=>a.slice(0,7)))];
-  if(!months.length){cal.innerHTML='<p class="fine">No open dates right now. Please request a date below.</p>';return}
+  if(!months.length){cal.innerHTML='<p class="fine">'+I18N.t("No open dates right now. Please request a date below.")+'</p>';return}
   mi=0; drawMonth();
 }
 function drawMonth(){
   const ym=months[mi], [y,m]=ym.split("-").map(Number);
   const first=new Date(Date.UTC(y,m-1,1)), days=new Date(Date.UTC(y,m,0)).getUTCDate();
-  const title=first.toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"});
-  let h=`<div class="pc-cal-head"><button type="button" class="pc-nav" data-d="-1" ${mi===0?"disabled":""} aria-label="Previous month">‹</button><span>${title}</span><button type="button" class="pc-nav" data-d="1" ${mi===months.length-1?"disabled":""} aria-label="Next month">›</button></div><div class="pc-grid">`;
-  ["S","M","T","W","T","F","S"].forEach(w=>h+=`<span class="pc-wd">${w}</span>`);
+  const title=first.toLocaleDateString(I18N.locale(),{month:"long",year:"numeric",timeZone:"UTC"});
+  let h=`<div class="pc-cal-head"><button type="button" class="pc-nav" data-d="-1" ${mi===0?"disabled":""} aria-label="${I18N.t("Previous month")}">‹</button><span>${title}</span><button type="button" class="pc-nav" data-d="1" ${mi===months.length-1?"disabled":""} aria-label="${I18N.t("Next month")}">›</button></div><div class="pc-grid">`;
+  (I18N.lang==="he"?["א","ב","ג","ד","ה","ו","ש"]:["S","M","T","W","T","F","S"]).forEach(w=>h+=`<span class="pc-wd">${w}</span>`);
   for(let i=0;i<first.getUTCDay();i++) h+='<span></span>';
   for(let dd=1;dd<=days;dd++){
     const iso=`${ym}-${String(dd).padStart(2,"0")}`;
@@ -431,10 +434,11 @@ cal.addEventListener("click",e=>{
   const day=e.target.closest(".pc-day.open"); if(day) choose(day.dataset.iso);
 });
 document.getElementById("bReq").addEventListener("click",()=>choose("request"));
+document.addEventListener("langchange",()=>{choose(sel.value)});
 function choose(v){
   sel.value=v;
-  picked.textContent=v==="request"?"":v?"Selected: "+fmtLong(v):"";
-  reqWrap.hidden=!isRequest(); reqDate.required=isRequest(); btn.textContent=isRequest()?REQ_LABEL:PAY_LABEL;
+  picked.textContent=v==="request"?"":v?I18N.t("Selected: {d}",{d:fmtLong(v)}):"";
+  reqWrap.hidden=!isRequest(); reqDate.required=isRequest(); btn.textContent=isRequest()?reqLabel():payLabel();
   if(months.length) drawMonth();
 }
 {const t=new Date();t.setDate(t.getDate()+1);reqDate.min=t.toISOString().slice(0,10)}
@@ -443,10 +447,10 @@ form.addEventListener("submit",async ev=>{
   const missing=[...form.querySelectorAll("[required]")].find(el=>!el.value.trim()||!el.checkValidity());
   if(missing){
     status.hidden=false;status.className="status err";
-    status.textContent=`Please fill in "${form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()}" before sending.`;
+    status.textContent=I18N.t("Please fill in \"{x}\" before sending.",{x:form.querySelector(`label[for="${missing.id}"]`).childNodes[0].textContent.trim()});
     missing.focus();return;
   }
-  btn.disabled=true;btn.textContent="Sending…";
+  btn.disabled=true;btn.textContent=I18N.t("Sending…");
   const request=isRequest();
   try{
     const data=new FormData(form);
@@ -461,8 +465,8 @@ form.addEventListener("submit",async ev=>{
     status.hidden=false;status.className="status ok";status.textContent="Thanks! Taking you to payment…";
     location.href=PRIVATE_PAY_LINK;
   }catch(e){
-    status.hidden=false;status.className="status err";status.textContent="Didn't go through. Please try again.";
-    btn.disabled=false;btn.textContent=request?REQ_LABEL:PAY_LABEL;
+    status.hidden=false;status.className="status err";status.textContent=I18N.t("Didn't go through. Please try again.");
+    btn.disabled=false;btn.textContent=request?reqLabel():payLabel();
   }
 });
 })();

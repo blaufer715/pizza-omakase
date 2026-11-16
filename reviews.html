@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="Reviews · Pizza Omakase">
 <meta property="og:image" content="https://pizzaomakase.co.il/images/originals/round-margherita-leopard.jpg">
-<title>Reviews · Pizza Omakase</title>
-<meta name="description" content="What guests say about Pizza Omakase, a chef's-choice New York–style pizza tasting in Israel. Been to an evening? Leave a review.">
+<title data-he="המלצות · פיצה אומקאסה">Reviews · Pizza Omakase</title>
+<meta name="description" content="What guests say about Pizza Omakase, a chef's-choice New York–style pizza tasting in Israel. Been to an evening? Leave a review." data-he-content="מה האורחים מספרים על פיצה אומקאסה – טעימות פיצה בסגנון ניו יורק, לפי בחירת השף. הייתם באחד הערבים? השאירו המלצה.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Pizza Omakase">
-<meta property="og:description" content="What guests say about Pizza Omakase, a chef's-choice New York–style pizza tasting in Israel. Been to an evening? Leave a review.">
+<meta property="og:description" content="What guests say about Pizza Omakase, a chef's-choice New York–style pizza tasting in Israel. Been to an evening? Leave a review." data-he-content="מה האורחים מספרים על פיצה אומקאסה – טעימות פיצה בסגנון ניו יורק, לפי בחירת השף. הייתם באחד הערבים? השאירו המלצה.">
 <meta property="og:url" content="https://pizzaomakase.co.il/reviews.html">
 <meta property="og:locale" content="en_IL">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,6 +18,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="i18n.css">
+<script src="i18n.js"></script>
 <style>
 /* Layout: reviews page — heading + Google button, approved guest reviews in a two-column grid, then the leave-a-review form.
    Palette: basil-ink on a cool flour-dusted marble, crust gold for warmth, tomato reserved for actions. */
@@ -223,13 +226,13 @@ fieldset.rating legend{font-family:var(--display);font-weight:600;font-size:.92r
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="mark" href="./" aria-label="Pizza Omakase home"><img src="favicon.svg" alt="Pizza Omakase" width="36" height="36"></a>
-    <nav class="links" aria-label="Main">
-      <a href="./#dates">Pizza Omakase</a>
-      <a href="private-events.html">Private events</a>
-      <a href="workshops.html">Workshops</a>
-      <a href="./#about">About</a>
-      <a href="reviews.html" aria-current="page">Reviews</a>
+    <a class="mark" href="./" aria-label="Pizza Omakase home" data-he-aria-label="פיצה אומקאסה – דף הבית"><img src="favicon.svg" alt="Pizza Omakase" data-he-alt="פיצה אומקאסה" width="36" height="36"></a>
+    <nav class="links" aria-label="Main" data-he-aria-label="ראשי">
+      <a href="./#dates" data-he="פיצה אומקאסה">Pizza Omakase</a>
+      <a href="private-events.html" data-he="אירועים פרטיים">Private events</a>
+      <a href="workshops.html" data-he="סדנאות">Workshops</a>
+      <a href="./#about" data-he="אודות">About</a>
+      <a href="reviews.html" aria-current="page" data-he="המלצות">Reviews</a>
     </nav>
   </div>
 </header>
@@ -239,13 +242,13 @@ fieldset.rating legend{font-family:var(--display);font-weight:600;font-size:.92r
     <div class="wrap">
       <div class="rv-head">
         <div class="copy">
-          <p class="eyebrow">From our guests</p>
-          <h1>Reviews</h1>
+          <p class="eyebrow" data-he="מהאורחים שלנו">From our guests</p>
+          <h1 data-he="המלצות">Reviews</h1>
         </div>
-        <a class="btn" id="googleReview" href="#" target="_blank" rel="noopener" hidden>Review us on Google</a>
+        <a class="btn" id="googleReview" href="#" target="_blank" rel="noopener" hidden data-he="דרגו אותנו בגוגל">Review us on Google</a>
       </div>
       <div class="reviews" id="reviewsList" aria-live="polite">
-        <p class="empty">Loading reviews…</p>
+        <p class="empty" data-he="טוען המלצות…">Loading reviews…</p>
       </div>
     </div>
   </section>
@@ -253,27 +256,27 @@ fieldset.rating legend{font-family:var(--display);font-weight:600;font-size:.92r
   <section class="alt" id="leave-review">
     <div class="wrap">
       <form class="panel review-form" id="reviewForm" novalidate>
-        <h2 class="form-title">Leave a review</h2>
+        <h2 class="form-title" data-he="השאירו המלצה">Leave a review</h2>
         <div class="row">
-          <div class="field"><label for="v-name">Name</label><input id="v-name" name="name" autocomplete="name" required></div>
-          <div class="field"><label for="v-when">Evening <span class="opt">(optional)</span></label><input id="v-when" name="evening" placeholder="e.g. 14 Oct, Jaffa"></div>
+          <div class="field"><label for="v-name" data-he="שם">Name</label><input id="v-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="v-when" data-he="ערב <span class=&quot;opt&quot;>(לא חובה)</span>">Evening <span class="opt">(optional)</span></label><input id="v-when" name="evening" placeholder="e.g. 14 Oct, Jaffa" data-he-placeholder="לדוגמה: 14 באוקטובר, יפו"></div>
         </div>
         <fieldset class="rating">
-          <legend>Rating</legend>
+          <legend data-he="דירוג">Rating</legend>
           <div class="rate">
-            <input type="radio" id="v-r5" name="rating" value="5" required><label for="v-r5" title="5 stars">★</label>
-            <input type="radio" id="v-r4" name="rating" value="4"><label for="v-r4" title="4 stars">★</label>
-            <input type="radio" id="v-r3" name="rating" value="3"><label for="v-r3" title="3 stars">★</label>
-            <input type="radio" id="v-r2" name="rating" value="2"><label for="v-r2" title="2 stars">★</label>
-            <input type="radio" id="v-r1" name="rating" value="1"><label for="v-r1" title="1 star">★</label>
+            <input type="radio" id="v-r5" name="rating" value="5" required><label for="v-r5" title="5 stars" data-he-title="5 כוכבים">★</label>
+            <input type="radio" id="v-r4" name="rating" value="4"><label for="v-r4" title="4 stars" data-he-title="4 כוכבים">★</label>
+            <input type="radio" id="v-r3" name="rating" value="3"><label for="v-r3" title="3 stars" data-he-title="3 כוכבים">★</label>
+            <input type="radio" id="v-r2" name="rating" value="2"><label for="v-r2" title="2 stars" data-he-title="2 כוכבים">★</label>
+            <input type="radio" id="v-r1" name="rating" value="1"><label for="v-r1" title="1 star" data-he-title="כוכב אחד">★</label>
           </div>
         </fieldset>
         <div class="field">
-          <label for="v-text">Your review</label>
+          <label for="v-text" data-he="ההמלצה שלכם">Your review</label>
           <textarea id="v-text" name="review" required></textarea>
         </div>
         <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn primary" type="submit">Send review</button>
+        <button class="btn primary" type="submit" data-he="שליחת המלצה">Send review</button>
         <p class="status" role="status" hidden></p>
       </form>
     </div>
@@ -327,20 +330,20 @@ async function loadReviews(){
   list.textContent="";
   if(!shown.length){
     const p=document.createElement("p");p.className="empty";
-    p.textContent="No reviews yet. Been to an evening? Be the first to leave one.";
+    p.textContent=I18N.t("No reviews yet. Been to an evening? Be the first to leave one.");
     list.appendChild(p);return;
   }
   for(const r of shown){
     const f=document.createElement("figure");f.className="review";
     const n=Math.max(0,Math.min(5,parseInt(r.rating,10)||0));
     if(n){
-      const st=document.createElement("div");st.className="stars";st.setAttribute("aria-label",n+" out of 5 stars");
+      const st=document.createElement("div");st.className="stars";st.setAttribute("aria-label",I18N.t("{n} out of 5 stars",{n}));
       st.textContent="★".repeat(n);const off=document.createElement("span");off.className="off";off.textContent="★".repeat(5-n);st.appendChild(off);
       f.appendChild(st);
     }
     const q=document.createElement("blockquote");q.textContent=r.review;
-    const c=document.createElement("figcaption");c.textContent=r.name||"Guest";
-    if(r.date){const d=new Date(r.date+"T12:00:00");if(!isNaN(d)){const s=document.createElement("span");s.textContent=d.toLocaleDateString("en-GB",{month:"short",year:"numeric"});c.appendChild(s)}}
+    const c=document.createElement("figcaption");c.textContent=r.name||I18N.t("Guest");
+    if(r.date){const d=new Date(r.date+"T12:00:00");if(!isNaN(d)){const s=document.createElement("span");s.textContent=d.toLocaleDateString(I18N.locale(),{month:"short",year:"numeric"});c.appendChild(s)}}
     f.append(q,c);list.appendChild(f);
   }
 }
@@ -351,10 +354,10 @@ form.addEventListener("submit",async ev=>{
   ev.preventDefault();
   const fail=(msg,el)=>{status.hidden=false;status.className="status err";status.textContent=msg;if(el)el.focus()};
   const nameEl=document.getElementById("v-name"), textEl=document.getElementById("v-text");
-  if(!nameEl.value.trim()) return fail('Please fill in "Name" before sending.',nameEl);
-  if(!form.querySelector('input[name="rating"]:checked')) return fail('Please choose a star rating before sending.',document.getElementById("v-r5"));
-  if(!textEl.value.trim()) return fail('Please write your review before sending.',textEl);
-  btn.disabled=true;btn.textContent="Sending…";
+  if(!nameEl.value.trim()) return fail(I18N.t('Please fill in "{x}" before sending.',{x:document.querySelector('label[for="v-name"]').textContent.trim()}),nameEl);
+  if(!form.querySelector('input[name="rating"]:checked')) return fail(I18N.t('Please choose a star rating before sending.'),document.getElementById("v-r5"));
+  if(!textEl.value.trim()) return fail(I18N.t('Please write your review before sending.'),textEl);
+  btn.disabled=true;btn.textContent=I18N.t("Sending…");
   try{
     const data=new FormData(form);
     data.append("access_key",WEB3FORMS_KEY);
@@ -363,14 +366,15 @@ form.addEventListener("submit",async ev=>{
     const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
     if(!res.ok) throw new Error(res.status);
     form.reset();
-    status.hidden=false;status.className="status ok";status.textContent="Thank you! Your review will appear here once it's approved.";
+    status.hidden=false;status.className="status ok";status.textContent=I18N.t("Thank you! Your review will appear here once it's approved.");
   }catch(e){
-    fail("Didn't go through. Please try again.");
+    fail(I18N.t("Didn't go through. Please try again."));
   }finally{
-    btn.disabled=false;btn.textContent="Send review";
+    btn.disabled=false;btn.textContent=I18N.t("Send review");
   }
 });
 loadReviews();
+document.addEventListener("langchange",loadReviews);
 </script>
 </body>
 </html>

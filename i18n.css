@@ -1,0 +1,24 @@
+/* Language switch + Hebrew (right-to-left) adjustments, shared by every page. */
+.lang-toggle{font:inherit;font-weight:600;font-size:.85rem;color:inherit;background:transparent;border:1px solid currentColor;border-radius:999px;padding:3px 12px;cursor:pointer;opacity:.85;line-height:1.4}
+.lang-toggle:hover,.lang-toggle:focus-visible{opacity:1}
+
+/* Hebrew typography: the Latin fonts have no Hebrew letters, so swap in Hebrew families. */
+html[lang="he"]{
+  --display:"Rubik","Bricolage Grotesque",Arial,sans-serif;
+  --body:"Frank Ruhl Libre","Source Serif 4",Georgia,serif;
+  --mono:"Rubik","IBM Plex Mono",ui-monospace,monospace;
+}
+/* Wide letter-spacing and all-caps styling suit Latin labels, not Hebrew. */
+html[lang="he"] .eyebrow,html[lang="he"] .pill,html[lang="he"] .label,html[lang="he"] .pc-meta,
+html[lang="he"] .date .dow,html[lang="he"] .date .mon,html[lang="he"] .soon,html[lang="he"] .pc-wd,
+html[lang="he"] h1,html[lang="he"] h2,html[lang="he"] h3{letter-spacing:0}
+
+/* Right-to-left layout fixes for things that were placed with left/right. */
+html[dir="rtl"] .pc-form{text-align:right}
+html[dir="rtl"] .pc-link{align-self:flex-start}
+html[dir="rtl"] input[type="tel"],html[dir="rtl"] input[type="email"],html[dir="rtl"] input[type="url"]{direction:ltr;text-align:right}
+html[dir="rtl"] .soon{right:auto;left:-16px;transform:rotate(-8deg)}
+@media (max-width:820px){html[dir="rtl"] .soon{left:-6px}}
+html[dir="rtl"] .pc-nav{transform:scaleX(-1)}
+/* Hidden spam-trap fields sit far off to the left; in right-to-left pages that would create a huge sideways scroll. */
+html[dir="rtl"] .hp{left:auto;right:-9999px}
