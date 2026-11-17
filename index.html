@@ -140,6 +140,9 @@ section.alt{background:var(--soft)}
 .about-copy p{font-size:1.15rem;max-width:52ch}
 .about-copy .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
 .about-photo{margin:0}
+.about-text{max-width:760px;display:flex;flex-direction:column;gap:16px}
+.about-text p{font-size:1.15rem;margin:0}
+.about-more{padding-block:clamp(40px,6vw,72px)}
 .about-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 25%;border-radius:var(--radius);display:block}
 @media (max-width:820px){.about-grid{grid-template-columns:1fr}.about-photo{max-width:440px}}
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
@@ -286,7 +289,7 @@ footer .wrap a:hover{color:var(--ink)}
   <section class="about-page">
     <div class="wrap about-grid">
       <div class="about-copy">
-        <span class="eyebrow" data-he="אודות">About</span>
+        <span class="eyebrow" data-he="על השף">About the Chef</span>
         <h2 data-he="מניו יורק לישראל">From New York to Israel</h2>
         <p data-he="גדלתי בניו יורק, וכילד אכלתי פיצה כמעט כל יום. הפיצה הניו־יורקית היא ההשראה שלי – ואותה אני רוצה להביא לישראל.">I grew up in New York and ate pizza almost every day as a kid. That New York pizza is what inspired me, and it's what I want to bring to Israel.</p>
         <p data-he="אחרי העלייה לארץ למדתי בבית הספר לבישול דנון בתל אביב, ושם האהבה שלי לבישול ולטעמים רק הלכה וגדלה.">After making aliyah, I went to culinary school at Danon in Tel Aviv, where my passion for cooking and flavor kept growing.</p>
@@ -299,6 +302,19 @@ footer .wrap a:hover{color:var(--ink)}
       <figure class="about-photo">
         <img src="images/chef.jpg" alt="The chef at work in a professional kitchen, wearing Danon culinary school whites" data-he-alt="השף עובד במטבח מקצועי, במדים של בית הספר לבישול דנון" loading="lazy" width="1200" height="1600">
       </figure>
+    </div>
+  </section>
+  <section class="about-page about-more">
+    <div class="wrap about-text">
+      <h2 data-he="מה זה פיצה אומקאסה?">What is Pizza Omakase?</h2>
+      <p data-he="פיצה אומקאסה היא חוויה מרגשת שבה אני מכין חמש פיצות ייחודיות, טריות, במיוחד לאורחים שלי. כל ערב נפתח ביין ובמנה ראשונה לקבלת פנים, ואחריהם מגיעות חמש פיצות ברצף – כל אחת עם טעמים, תוספות או סגנון פיצה אחר. את הערב חותם קינוח מתוק.">Pizza Omakase is an exciting experience where I make 5 unique pies fresh for my guests. Each evening begins with wine and an appetizer to welcome my guests, followed by 5 pizzas in a row, each with different flavors, toppings or pizza styles. The evening finishes with a sweet treat to cap off the night.</p>
+      <p data-he="זו אחת מחוויות הפיצה הייחודיות בעולם, ואשמח מאוד לארח גם אתכם.">It's one of the most unique pizza experiences in the world, and I hope you will join.</p>
+    </div>
+  </section>
+  <section class="about-page about-more alt">
+    <div class="wrap about-text">
+      <h2 data-he="מידע נוסף">Additional Information</h2>
+      <p data-he="<b>שימו לב:</b> כל הפיצות מוכנות במטבח כשר ומחומרי גלם כשרים, ולכן לא יוגשו מוצרי בשר או עוף."><b>Please note:</b> All pizzas are made in a kosher kitchen with kosher ingredients. As such, there will be no meat or poultry products served.</p>
     </div>
   </section>
 </div>
