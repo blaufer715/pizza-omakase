@@ -24,7 +24,6 @@
     "Didn't go through. Please try again.": "השליחה לא הצליחה. נסו שוב.",
     "Send": "שליחה",
     // private evening booking
-    "Continue to payment · ₪1,200": "המשך לתשלום · ₪1,200",
     "Book Now": "הזמינו עכשיו",
     "Send date request": "שליחת בקשה לתאריך",
     "Selected: {d}": "התאריך שנבחר: {d}",
