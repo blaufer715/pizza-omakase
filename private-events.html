@@ -394,12 +394,12 @@ form.addEventListener("submit",async ev=>{
 });
 </script>
 <script>
-/* Private Pizza Omakase booking: the next 3 open Tuesdays at least 5 days ahead (Israel time),
+/* Private Pizza Omakase booking: the next 3 open Tuesday/Thursday evenings at least 5 days ahead (Israel time),
    skipping any date already in the Google Sheet; booking goes straight to the ₪1,500 Morning link. */
 (()=>{
 const PRIVATE_PAY_LINK = "https://mrng.to/uQAEgTNSwF";
 const EVENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-lP_wJIR6Vepet6Y2UDRExhSLIXeEjG2Xf9GtXmF34XiUtwmNr2so5jNAj9eTIJwAHDrVMnOuB5fs/pub?gid=0&single=true&output=csv";
-const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3, KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
+const MIN_DAYS_AHEAD = 5, DATES_SHOWN = 3, PRIVATE_DAYS = [2, 4] /* Tue, Thu */, KEY = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
 const form=document.getElementById("bookPrivate"), status=form.querySelector(".status"), btn=form.querySelector("button[type=submit]");
 const sel=document.getElementById("b-date"), reqWrap=document.getElementById("b-req-wrap"), reqDate=document.getElementById("b-reqdate");
 const payLabel=()=>I18N.t("Book Now"), reqLabel=()=>I18N.t("Send date request");
@@ -417,9 +417,9 @@ if(location.hash==="#book-private") openForm();
   }catch(_){}
   const ilToday=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Jerusalem"}).format(new Date());
   const d=new Date(ilToday+"T12:00:00Z");d.setUTCDate(d.getUTCDate()+MIN_DAYS_AHEAD);
-  while(d.getUTCDay()!==2) d.setUTCDate(d.getUTCDate()+1);
   const avail=[];
-  for(let i=0;avail.length<DATES_SHOWN&&i<52;i++,d.setUTCDate(d.getUTCDate()+7)){
+  for(let i=0;avail.length<DATES_SHOWN&&i<365;i++,d.setUTCDate(d.getUTCDate()+1)){
+    if(!PRIVATE_DAYS.includes(d.getUTCDay())) continue;
     const iso=d.toISOString().slice(0,10);
     if(!taken.has(iso)) avail.push(iso);
   }
