@@ -1,6 +1,6 @@
 /* English / Hebrew switch for every page.
    - Page text: English is written in the HTML; its Hebrew sits next to it in data-he (inner HTML)
-     and data-he-<attr> (placeholder, alt, aria-label, content, title).
+     and data-he-<attr> (placeholder, alt, aria-label, content, title, src).
    - Script-generated text: page scripts call I18N.t("English text", {vars}); Hebrew lives in HE below.
    - Choice order: ?lang=he|en in the URL > saved choice > browser language (Hebrew browsers get Hebrew).
    Load this in <head> (not deferred) so the page direction is set before it paints. */
@@ -55,7 +55,7 @@
   function setRoot(){ root.lang = lang; root.dir = lang === "he" ? "rtl" : "ltr"; }
   setRoot();
 
-  var ATTRS = ["placeholder", "alt", "aria-label", "content", "title"];
+  var ATTRS = ["placeholder", "alt", "aria-label", "content", "title", "src"];
   function apply(){
     document.querySelectorAll("[data-he]").forEach(function(el){
       if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
