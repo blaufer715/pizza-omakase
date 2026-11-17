@@ -107,6 +107,14 @@ section.alt{background:var(--soft)}
 @media (min-width:701px){
   #pies{background:var(--bg);padding-block:clamp(16px,2.5vw,32px)}
   #dates{padding-top:clamp(12px,2vw,24px)}
+  /* Metal pizza tray under each pie (desktop only) */
+  #pies .pies figure{position:relative;isolation:isolate}
+  #pies .pies figure::before{content:"";position:absolute;inset:-4.5%;border-radius:50%;z-index:-1;
+    background:
+      radial-gradient(circle, transparent 0 88%, rgba(0,0,0,.35) 89%, rgba(255,255,255,.85) 91.5%, #c9ced2 94%, #7d848a 98.5%, transparent 100%),
+      conic-gradient(from 20deg, #e9ecee, #a7adb2, #f4f6f7, #9aa1a6, #e3e6e8, #a2a8ad, #eef0f1, #9ea4a9, #e9ecee);
+    box-shadow:0 12px 20px -8px rgba(40,20,10,.5), 0 2px 3px rgba(0,0,0,.25)}
+  #pies .pies img{filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
   #pies .pies{max-width:none;padding:clamp(28px,4vw,52px);border-radius:var(--radius);background-color:#FBF7F0;background-image:linear-gradient(90deg,rgba(190,30,40,.55) 50%,transparent 50%),linear-gradient(rgba(190,30,40,.55) 50%,transparent 50%);background-size:18px 18px;box-shadow:inset 0 0 80px rgba(60,20,10,.18)}
 }
 .sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:clamp(28px,4vw,44px)}
