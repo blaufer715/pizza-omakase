@@ -204,10 +204,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 /* Private events: booking card first, custom event form close behind it */
 #book-private{padding-block:clamp(28px,4vw,48px) clamp(12px,2vw,20px)}
+.pe-label{margin:0 0 clamp(14px,2vw,22px)}
 .pe-pizza{display:none;margin:0}
 .pe-pizza img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
 @media (min-width:821px){
   #book-private .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,64px);align-items:center}
+  #book-private .pe-label{margin:0 0 14px}
   #book-private .private-card{width:100%;margin:0}
   .pe-pizza{display:block;max-width:440px;justify-self:center}
 }
@@ -276,6 +278,8 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
 
   <section id="book-private">
     <div class="wrap">
+      <div class="pe-left">
+      <p class="eyebrow pe-label" data-he="אירועים פרטיים">Private events</p>
       <div class="private-card">
         <h3 data-he="פיצה אומקאסה פרטית">A private Pizza Omakase</h3>
         <p class="pc-text" data-he="כל חוויית הטעימות בהובלת השף – רק בשבילכם.">The full chef-guided tasting, for just you and your party.</p>
@@ -311,6 +315,7 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
         <button class="btn primary" type="submit" data-he="הזמינו עכשיו">Book Now</button>
         <p class="status" role="status" hidden></p>
       </form>
+      </div>
       </div>
       <figure class="pe-pizza">
         <img src="images/pizza-spinach-artichoke.webp?v=4" alt="The Spinach Artichoke pie" data-he-alt="פיצה תרד וארטישוק" width="900" height="900">
