@@ -201,6 +201,11 @@ footer{border-top:1px solid var(--line);padding-block:32px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
 
 /* private events page */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* Private events: booking card first, custom event form close behind it */
+#book-private{padding-block:clamp(28px,4vw,48px) clamp(12px,2vw,20px)}
+#book-private + section{padding-top:clamp(12px,2vw,20px)}
+#book-private + section .panel{margin-top:0}
 .pe-hero{padding-block:clamp(40px,7vw,80px) clamp(24px,4vw,40px)}
 .pe-hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center}
 .pe-hero h1{font-size:clamp(2.8rem,8vw,5.2rem);font-weight:800;letter-spacing:-.04em}
@@ -260,17 +265,7 @@ button.pc-day.on{background:#C9A45C;color:#14110D}
 </header>
 
 <main>
-  <div class="pe-hero">
-    <div class="wrap">
-      <div class="copy">
-        <p class="eyebrow" data-he="אירועים פרטיים">Private events</p>
-        <h1 data-he="פיצה אומקאסה<br><em>לקבוצה שלכם.</em>">Pizza Omakase<br><em>for your group.</em></h1>
-      </div>
-      <figure>
-        <img src="images/pizza-spinach-artichoke.webp?v=4" alt="The Spinach Artichoke pie" data-he-alt="פיצה תרד וארטישוק" width="900" height="900">
-      </figure>
-    </div>
-  </div>
+  <h1 class="sr-only" data-he="אירועים פרטיים · פיצה אומקאסה">Private events · Pizza Omakase</h1>
 
   <section id="book-private">
     <div class="wrap">
