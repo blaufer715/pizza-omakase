@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="i18n.css?v=b4e3d03b">
-<script src="i18n.js?v=22c2c5f6"></script>
+<script src="i18n.js?v=b269d861"></script>
 <style>
 /* Layout: reviews page — heading + Google button, approved guest reviews in a two-column grid, then the leave-a-review form.
    Palette: basil-ink on a cool flour-dusted marble, crust gold for warmth, tomato reserved for actions. */
@@ -291,15 +291,18 @@ fieldset.rating legend{font-family:var(--display);font-weight:600;font-size:.92r
 
 <script>
 /* ===================== SETTINGS =====================
-   REVIEWS_CSV_URL:   a "Reviews" tab in your Google Sheet, published as CSV
-                      (File → Share → Publish to web → choose the tab → CSV).
-                      Columns: name | date | rating | review | approved
-                      Only rows with approved = yes appear here.
+   Reviews go live immediately, no approval step.
+   Each review is sent to the Google Form "Pizza Omakase reviews", which writes it to the
+   Google Sheet "Pizza Omakase – Reviews" (tab Form Responses 1). That tab, published as CSV,
+   is REVIEWS_CSV_URL. To edit a review, change it in the sheet; to remove one, delete its row.
+   Columns: timestamp | name | evening | rating | review
    GOOGLE_REVIEW_URL: the "Ask for reviews" link from your Google Business Profile.
                       Leave "" to hide the "Review us on Google" button.
-   New reviews from the form below are emailed to you through Web3Forms.
+   You also get each new review by email through Web3Forms.
 ====================================================== */
-const REVIEWS_CSV_URL   = "";
+const REVIEWS_CSV_URL   = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0hCF4Jb0p4aAQwqCRU9HJRKhOC3VKh_laD6vjMONOe_mH-n77vOn5Kjub47C_uRFn5TxEscZZkywe/pub?gid=686113116&single=true&output=csv";  // sheet "Pizza Omakase – Reviews"
+const REVIEW_FORM_POST  = "https://docs.google.com/forms/d/e/1FAIpQLSd8yhtM70KyNB6E81w9b1LcjWM6LQhD7ArglpmzzLjLwoU2nA/formResponse";
+const REVIEW_FIELDS     = {name:"entry.1103815916", evening:"entry.1308335301", rating:"entry.1614488545", review:"entry.1998469437"};
 const GOOGLE_REVIEW_URL = "";
 const WEB3FORMS_KEY     = "0ec3b494-e699-4ae4-8686-b59944bfb0a0";
 
@@ -318,6 +321,8 @@ function parseCSV(text){
   return rows.filter(r=>r.some(v=>v.trim())).map(r=>Object.fromEntries(head.map((h,i)=>[h,(r[i]||"").trim()])));
 }
 
+/* Reviews just sent from this page show right away, before the published sheet refreshes (~5 min). */
+const pending=[];
 async function loadReviews(){
   const list=document.getElementById("reviewsList");
   const g=document.getElementById("googleReview");
@@ -326,7 +331,9 @@ async function loadReviews(){
   if(REVIEWS_CSV_URL){
     try{const res=await fetch(REVIEWS_CSV_URL,{cache:"no-store"});if(res.ok) rows=parseCSV(await res.text())}catch(e){}
   }
-  const shown=rows.filter(r=>/^(yes|y|true|1)$/i.test(r.approved||"")&&r.review).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const when=r=>{const m=(r.timestamp||"").match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);return m?new Date(+m[3],m[1]-1,+m[2]):null};
+  const shown=rows.filter(r=>(r.review||"").trim()).map(r=>({...r,_d:when(r)})).sort((a,b)=>(b._d||0)-(a._d||0));
+  shown.unshift(...pending.filter(p=>!shown.some(r=>r.review===p.review&&r.name===p.name)));
   list.textContent="";
   if(!shown.length){
     const p=document.createElement("p");p.className="empty";
@@ -343,7 +350,7 @@ async function loadReviews(){
     }
     const q=document.createElement("blockquote");q.textContent=r.review;
     const c=document.createElement("figcaption");c.textContent=r.name||I18N.t("Guest");
-    if(r.date){const d=new Date(r.date+"T12:00:00");if(!isNaN(d)){const s=document.createElement("span");s.textContent=d.toLocaleDateString(I18N.locale(),{month:"short",year:"numeric"});c.appendChild(s)}}
+    if(r._d&&!isNaN(r._d)){const s=document.createElement("span");s.textContent=r._d.toLocaleDateString(I18N.locale(),{month:"short",year:"numeric"});c.appendChild(s)}
     f.append(q,c);list.appendChild(f);
   }
 }
@@ -357,16 +364,21 @@ form.addEventListener("submit",async ev=>{
   if(!nameEl.value.trim()) return fail(I18N.t('Please fill in "{x}" before sending.',{x:document.querySelector('label[for="v-name"]').textContent.trim()}),nameEl);
   if(!form.querySelector('input[name="rating"]:checked')) return fail(I18N.t('Please choose a star rating before sending.'),document.getElementById("v-r5"));
   if(!textEl.value.trim()) return fail(I18N.t('Please write your review before sending.'),textEl);
+  if(form.querySelector('[name="botcheck"]')?.checked){form.reset();return}   // spam bot filled the hidden trap field
   btn.disabled=true;btn.textContent=I18N.t("Sending…");
   try{
     const data=new FormData(form);
+    const g=new FormData();
+    for(const k in REVIEW_FIELDS) g.append(REVIEW_FIELDS[k],(data.get(k)||"").toString());
+    await fetch(REVIEW_FORM_POST,{method:"POST",mode:"no-cors",body:g});   // publishes the review
+    pending.push({name:data.get("name"),evening:data.get("evening"),rating:data.get("rating"),review:data.get("review"),_d:new Date()});
     data.append("access_key",WEB3FORMS_KEY);
     data.append("subject","Pizza Omakase · new review ("+data.get("rating")+"★)");
     data.append("from_name","Pizza Omakase website");
-    const res=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data});
-    if(!res.ok) throw new Error(res.status);
+    fetch("https://api.web3forms.com/submit",{method:"POST",headers:{Accept:"application/json"},body:data}).catch(()=>{});  // email copy to the owner
     form.reset();
-    status.hidden=false;status.className="status ok";status.textContent=I18N.t("Thank you! Your review will appear here once it's approved.");
+    status.hidden=false;status.className="status ok";status.textContent=I18N.t("Thank you! Your review is now on the page.");
+    loadReviews();
   }catch(e){
     fail(I18N.t("Didn't go through. Please try again."));
   }finally{

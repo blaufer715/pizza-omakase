@@ -36,7 +36,7 @@
     "Please choose a star rating before sending.": "נא לבחור דירוג כוכבים לפני השליחה.",
     "Please write your review before sending.": "נא לכתוב את ההמלצה לפני השליחה.",
     "{n} out of 5 stars": "{n} מתוך 5 כוכבים",
-    "Thank you! Your review will appear here once it's approved.": "תודה! ההמלצה תופיע כאן אחרי שתאושר.",
+    "Thank you! Your review is now on the page.": "תודה! ההמלצה שלכם כבר מופיעה בעמוד.",
     "Send review": "שליחת המלצה",
     // thank-you pages
     "Thanks, the chef has your note.": "תודה, ההערה הגיעה לשף.",
