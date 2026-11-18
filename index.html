@@ -94,6 +94,7 @@ nav.links a,.mark{white-space:nowrap}
 .hero h1 em{font-style:normal;color:var(--tomato)}
 .hero .copy{display:flex;flex-direction:column;gap:24px;min-width:0}
 .hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .hero figure{margin:0;position:relative;order:-1}
 .hero figure img{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 30px rgba(0,0,0,.35))}
 .hero figure img.flyer{filter:none;border-radius:14px;box-shadow:0 30px 60px -25px rgba(0,0,0,.55);max-height:82vh;width:auto;max-width:100%;margin-inline:auto}
@@ -240,7 +241,7 @@ footer .wrap a:hover{color:var(--ink)}
   <div class="hero">
     <div class="wrap">
       <div class="copy">
-        <h1 data-he="פיצה<br><em>אומקאסה</em>">Pizza<br><em>Omakase</em></h1>
+        <h1 class="sr-only" data-he="פיצה אומקאסה">Pizza Omakase</h1>
         <p class="lede" data-he="ארוחת טעימות פיצה בשבע מנות, שבה השף לוקח אתכם למסע קולינרי ייחודי.">A 7-course pizza tasting experience where the chef guides you on a unique culinary journey.</p>
         <div class="includes-card">
         <p class="label" data-he="כולל:">Includes:</p>
